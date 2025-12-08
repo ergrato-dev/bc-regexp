@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200">
+  <defs>
+    <style>
+      .bg { fill: #1a1a2e; }
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 48px; font-weight: bold; fill: #ffffff; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 20px; fill: #a0a0a0; }
+      .regex { font-family: 'Consolas', 'Courier New', monospace; font-size: 24px; fill: #FF6B35; }
+      .accent { fill: #FF6B35; }
+      .accent2 { fill: #00BCD4; }
+      .accent3 { fill: #8BC34A; }
+      .bracket { font-family: 'Consolas', monospace; font-size: 72px; fill: #FF6B35; opacity: 0.3; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect class="bg" width="800" height="200"/>
+  
+  <!-- Decorative regex brackets -->
+  <text class="bracket" x="30" y="140">/</text>
+  <text class="bracket" x="720" y="140">/</text>
+  
+  <!-- Decorative elements -->
+  <circle class="accent" cx="120" cy="40" r="8"/>
+  <circle class="accent2" cx="145" cy="40" r="8"/>
+  <circle class="accent3" cx="170" cy="40" r="8"/>
+  
+  <!-- Pattern decoration -->
+  <rect class="accent" x="600" y="30" width="60" height="4" rx="2"/>
+  <rect class="accent2" x="620" y="42" width="80" height="4" rx="2"/>
+  <rect class="accent3" x="640" y="54" width="40" height="4" rx="2"/>
+  
+  <!-- Main title -->
+  <text class="title" x="120" y="100">Bootcamp RegExp</text>
+  
+  <!-- Subtitle -->
+  <text class="subtitle" x="120" y="135">De Zero a Hero en Expresiones Regulares</text>
+  
+  <!-- Regex example -->
+  <text class="regex" x="120" y="170">/^[a-z]+@\w+\.\w{2,}$/gi</text>
+  
+  <!-- Duration badge -->
+  <rect x="580" y="130" width="120" height="30" rx="15" fill="#FF6B35"/>
+  <text x="640" y="151" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1a1a2e">8 Semanas</text>
+</svg>

@@ -1,0 +1,105 @@
+# ===================================
+# Bootcamp RegExp - .gitignore
+# ===================================
+
+# -----------------
+# OS Generated
+# -----------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# -----------------
+# Editors & IDEs
+# -----------------
+# VS Code (mantener .vscode pero ignorar algunos)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# JetBrains
+.idea/
+*.iml
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Sublime Text
+*.sublime-workspace
+
+# -----------------
+# Node.js
+# -----------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+package-lock.json
+yarn.lock
+
+# -----------------
+# Python
+# -----------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+ENV/
+env/
+.env
+
+# -----------------
+# Build & Output
+# -----------------
+dist/
+build/
+out/
+*.min.js
+*.min.css
+
+# -----------------
+# Logs & Temp
+# -----------------
+*.log
+logs/
+tmp/
+temp/
+.cache/
+
+# -----------------
+# Testing
+# -----------------
+coverage/
+.nyc_output/
+*.lcov
+
+# -----------------
+# Proyecto Específico
+# -----------------
+# Archivos de notas personales
+notas-personales/
+mis-notas.md
+TODO.md
+
+# Backups de soluciones
+*.backup
+*.bak
+
+# Archivos de prueba temporales
+test-*.js
+test-*.py
+prueba-*.md
