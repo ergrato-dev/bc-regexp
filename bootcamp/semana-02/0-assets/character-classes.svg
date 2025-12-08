@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420">
+  <defs>
+    <style>
+      .bg { fill: #1a1a2e; }
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #ffffff; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; fill: #a0a0a0; }
+      .code { font-family: 'Consolas', 'Courier New', monospace; font-size: 16px; fill: #FF6B35; }
+      .label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; fill: #ffffff; }
+      .box { fill: #16213e; rx: 8; }
+      .accent { fill: #FF6B35; }
+      .accent2 { fill: #00BCD4; }
+      .accent3 { fill: #8BC34A; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect class="bg" width="600" height="420"/>
+  
+  <!-- Header -->
+  <text class="title" x="30" y="35">Semana 02: Character Classes</text>
+  <text class="subtitle" x="30" y="55">Clases de caracteres y shorthand</text>
+  
+  <!-- Week indicator -->
+  <rect x="520" y="15" width="60" height="25" rx="12" fill="#FF6B35"/>
+  <text x="550" y="33" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#1a1a2e">02/08</text>
+  
+  <!-- Row 1: Basic Classes -->
+  <rect class="box" x="20" y="70" width="175" height="70"/>
+  <text class="code" x="107" y="95" text-anchor="middle">[abc]</text>
+  <text class="label" x="107" y="115" text-anchor="middle">Uno de estos</text>
+  <text class="subtitle" x="107" y="130" text-anchor="middle" font-size="10">a, b, o c</text>
+  
+  <rect class="box" x="212" y="70" width="175" height="70"/>
+  <text class="code" x="300" y="95" text-anchor="middle">[^abc]</text>
+  <text class="label" x="300" y="115" text-anchor="middle">Ninguno de estos</text>
+  <text class="subtitle" x="300" y="130" text-anchor="middle" font-size="10">excepto a, b, c</text>
+  
+  <rect class="box" x="405" y="70" width="175" height="70"/>
+  <text class="code" x="492" y="95" text-anchor="middle">[a-z]</text>
+  <text class="label" x="492" y="115" text-anchor="middle">Rango</text>
+  <text class="subtitle" x="492" y="130" text-anchor="middle" font-size="10">a hasta z</text>
+  
+  <!-- Row 2: Shorthand Classes -->
+  <text class="subtitle" x="30" y="165">SHORTHAND CLASSES</text>
+  
+  <rect class="box" x="20" y="175" width="120" height="60"/>
+  <text x="80" y="200" text-anchor="middle" font-family="Consolas" font-size="20" fill="#FF6B35">\d</text>
+  <text class="label" x="80" y="220" text-anchor="middle">[0-9]</text>
+  
+  <rect class="box" x="155" y="175" width="120" height="60"/>
+  <text x="215" y="200" text-anchor="middle" font-family="Consolas" font-size="20" fill="#00BCD4">\w</text>
+  <text class="label" x="215" y="220" text-anchor="middle">[a-zA-Z0-9_]</text>
+  
+  <rect class="box" x="290" y="175" width="120" height="60"/>
+  <text x="350" y="200" text-anchor="middle" font-family="Consolas" font-size="20" fill="#8BC34A">\s</text>
+  <text class="label" x="350" y="220" text-anchor="middle">whitespace</text>
+  
+  <rect class="box" x="425" y="175" width="155" height="60"/>
+  <text x="502" y="200" text-anchor="middle" font-family="Consolas" font-size="20" fill="#e74c3c">\b</text>
+  <text class="label" x="502" y="220" text-anchor="middle">word boundary</text>
+  
+  <!-- Row 3: Negations -->
+  <text class="subtitle" x="30" y="260">NEGACIONES (mayúscula = opuesto)</text>
+  
+  <rect class="box" x="20" y="270" width="120" height="50"/>
+  <text x="80" y="295" text-anchor="middle" font-family="Consolas" font-size="18" fill="#FF6B35">\D</text>
+  <text class="subtitle" x="80" y="310" text-anchor="middle" font-size="9">[^0-9]</text>
+  
+  <rect class="box" x="155" y="270" width="120" height="50"/>
+  <text x="215" y="295" text-anchor="middle" font-family="Consolas" font-size="18" fill="#00BCD4">\W</text>
+  <text class="subtitle" x="215" y="310" text-anchor="middle" font-size="9">[^a-zA-Z0-9_]</text>
+  
+  <rect class="box" x="290" y="270" width="120" height="50"/>
+  <text x="350" y="295" text-anchor="middle" font-family="Consolas" font-size="18" fill="#8BC34A">\S</text>
+  <text class="subtitle" x="350" y="310" text-anchor="middle" font-size="9">no whitespace</text>
+  
+  <rect class="box" x="425" y="270" width="155" height="50"/>
+  <text x="502" y="295" text-anchor="middle" font-family="Consolas" font-size="18" fill="#e74c3c">\B</text>
+  <text class="subtitle" x="502" y="310" text-anchor="middle" font-size="9">no boundary</text>
+  
+  <!-- Example -->
+  <rect x="20" y="340" width="560" height="65" fill="#0d1117" rx="8"/>
+  <text class="subtitle" x="35" y="360" fill="#8BC34A">EJEMPLO:</text>
+  <text x="35" y="385" font-family="Consolas" font-size="18" fill="#FF6B35">/^[A-Z]\d{4}$/</text>
+  <text x="220" y="385" font-family="Consolas" font-size="14" fill="#8BC34A">✓ A1234</text>
+  <text x="320" y="385" font-family="Consolas" font-size="14" fill="#8BC34A">✓ Z9999</text>
+  <text x="420" y="385" font-family="Consolas" font-size="14" fill="#e74c3c">✗ a1234</text>
+  <text x="510" y="385" font-family="Consolas" font-size="14" fill="#e74c3c">✗ AB123</text>
+</svg>
