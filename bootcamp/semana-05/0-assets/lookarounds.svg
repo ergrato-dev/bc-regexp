@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420">
+  <defs>
+    <style>
+      .bg { fill: #1a1a2e; }
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #ffffff; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; fill: #a0a0a0; }
+      .label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; fill: #ffffff; }
+      .box { fill: #16213e; rx: 8; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect class="bg" width="600" height="420"/>
+  
+  <!-- Header -->
+  <text class="title" x="30" y="35">Semana 05: Lookahead y Lookbehind</text>
+  <text class="subtitle" x="30" y="55">Aserciones de ancho cero</text>
+  
+  <!-- Week indicator -->
+  <rect x="520" y="15" width="60" height="25" rx="12" fill="#FF6B35"/>
+  <text x="550" y="33" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#1a1a2e">05/08</text>
+  
+  <!-- Row 1: Lookahead -->
+  <text class="subtitle" x="30" y="80">LOOKAHEAD (→ mira adelante)</text>
+  
+  <rect class="box" x="20" y="90" width="275" height="55"/>
+  <text x="35" y="115" font-family="Consolas" font-size="16" fill="#8BC34A">(?=...)</text>
+  <text x="130" y="115" font-family="Arial" font-size="12" fill="#a0a0a0">Positive</text>
+  <text x="35" y="133" font-family="Arial" font-size="11" fill="#ffffff">Debe seguir esto</text>
+  
+  <rect class="box" x="305" y="90" width="275" height="55"/>
+  <text x="320" y="115" font-family="Consolas" font-size="16" fill="#e74c3c">(?!...)</text>
+  <text x="405" y="115" font-family="Arial" font-size="12" fill="#a0a0a0">Negative</text>
+  <text x="320" y="133" font-family="Arial" font-size="11" fill="#ffffff">NO debe seguir esto</text>
+  
+  <!-- Row 2: Lookbehind -->
+  <text class="subtitle" x="30" y="170">LOOKBEHIND (← mira atrás)</text>
+  
+  <rect class="box" x="20" y="180" width="275" height="55"/>
+  <text x="35" y="205" font-family="Consolas" font-size="16" fill="#00BCD4">(?&lt;=...)</text>
+  <text x="140" y="205" font-family="Arial" font-size="12" fill="#a0a0a0">Positive</text>
+  <text x="35" y="223" font-family="Arial" font-size="11" fill="#ffffff">Debe preceder esto</text>
+  
+  <rect class="box" x="305" y="180" width="275" height="55"/>
+  <text x="320" y="205" font-family="Consolas" font-size="16" fill="#FF6B35">(?&lt;!...)</text>
+  <text x="425" y="205" font-family="Arial" font-size="12" fill="#a0a0a0">Negative</text>
+  <text x="320" y="223" font-family="Arial" font-size="11" fill="#ffffff">NO debe preceder esto</text>
+  
+  <!-- Row 3: Examples -->
+  <text class="subtitle" x="30" y="265">EJEMPLOS</text>
+  
+  <rect x="20" y="275" width="560" height="50" fill="#0d1117" rx="8"/>
+  <text x="35" y="295" font-family="Consolas" font-size="13" fill="#8BC34A">/\d+(?=€)/</text>
+  <text x="150" y="295" font-family="Arial" font-size="12" fill="#a0a0a0">→ "100" de "100€"</text>
+  <text x="320" y="295" font-family="Consolas" font-size="13" fill="#00BCD4">/(?&lt;=\$)\d+/</text>
+  <text x="450" y="295" font-family="Arial" font-size="12" fill="#a0a0a0">→ "99" de "$99"</text>
+  
+  <!-- Row 4: Password Example -->
+  <text class="subtitle" x="30" y="350">PASSWORD VALIDATION</text>
+  
+  <rect x="20" y="360" width="560" height="50" fill="#0d1117" rx="8"/>
+  <text x="35" y="385" font-family="Consolas" font-size="12">
+    <tspan fill="#a0a0a0">/^</tspan><tspan fill="#8BC34A">(?=.*[A-Z])</tspan><tspan fill="#00BCD4">(?=.*[a-z])</tspan><tspan fill="#FF6B35">(?=.*\d)</tspan><tspan fill="#ffffff">.{8,}</tspan><tspan fill="#a0a0a0">$/</tspan>
+  </text>
+</svg>

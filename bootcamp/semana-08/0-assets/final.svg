@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500">
+  <defs>
+    <style>
+      .bg { fill: #1a1a2e; }
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #ffffff; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; fill: #a0a0a0; }
+      .week-title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #ffffff; }
+      .week-content { font-family: 'Consolas', monospace; font-size: 10px; fill: #00BCD4; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect class="bg" width="600" height="500"/>
+  
+  <!-- Header -->
+  <text class="title" x="300" y="35" text-anchor="middle">🎓 Bootcamp RegExp Completado</text>
+  <text class="subtitle" x="300" y="55" text-anchor="middle">De Zero a Hero en 8 Semanas</text>
+  
+  <!-- Badge -->
+  <rect x="520" y="15" width="60" height="25" rx="12" fill="#8BC34A"/>
+  <text x="550" y="33" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#1a1a2e">08/08</text>
+  
+  <!-- Week boxes - Row 1 -->
+  <rect x="20" y="75" width="135" height="95" rx="8" fill="#16213e"/>
+  <text x="35" y="95" class="week-title">Semana 01</text>
+  <text x="35" y="110" class="subtitle">Fundamentos</text>
+  <text x="35" y="130" class="week-content">. ^ $ \</text>
+  <text x="35" y="145" class="week-content">literales</text>
+  <text x="35" y="160" class="week-content">metacaracteres</text>
+  
+  <rect x="165" y="75" width="135" height="95" rx="8" fill="#16213e"/>
+  <text x="180" y="95" class="week-title">Semana 02</text>
+  <text x="180" y="110" class="subtitle">Clases</text>
+  <text x="180" y="130" class="week-content">[abc] [^abc]</text>
+  <text x="180" y="145" class="week-content">\d \w \s</text>
+  <text x="180" y="160" class="week-content">\b boundary</text>
+  
+  <rect x="310" y="75" width="135" height="95" rx="8" fill="#16213e"/>
+  <text x="325" y="95" class="week-title">Semana 03</text>
+  <text x="325" y="110" class="subtitle">Cuantificadores</text>
+  <text x="325" y="130" class="week-content">* + ? {n,m}</text>
+  <text x="325" y="145" class="week-content">greedy</text>
+  <text x="325" y="160" class="week-content">lazy: *? +?</text>
+  
+  <rect x="455" y="75" width="125" height="95" rx="8" fill="#16213e"/>
+  <text x="470" y="95" class="week-title">Semana 04</text>
+  <text x="470" y="110" class="subtitle">Grupos</text>
+  <text x="470" y="130" class="week-content">(capture)</text>
+  <text x="470" y="145" class="week-content">(?:non-cap)</text>
+  <text x="470" y="160" class="week-content">\1 backref</text>
+  
+  <!-- Week boxes - Row 2 -->
+  <rect x="20" y="180" width="135" height="95" rx="8" fill="#16213e"/>
+  <text x="35" y="200" class="week-title">Semana 05</text>
+  <text x="35" y="215" class="subtitle">Lookaround</text>
+  <text x="35" y="235" class="week-content">(?=) (?!)</text>
+  <text x="35" y="250" class="week-content">(?&lt;=) (?&lt;!)</text>
+  <text x="35" y="265" class="week-content">assertions</text>
+  
+  <rect x="165" y="180" width="135" height="95" rx="8" fill="#16213e"/>
+  <text x="180" y="200" class="week-title">Semana 06</text>
+  <text x="180" y="215" class="subtitle">Flags</text>
+  <text x="180" y="235" class="week-content">g i m s u</text>
+  <text x="180" y="250" class="week-content">y sticky</text>
+  <text x="180" y="265" class="week-content">d indices</text>
+  
+  <rect x="310" y="180" width="135" height="95" rx="8" fill="#16213e"/>
+  <text x="325" y="200" class="week-title">Semana 07</text>
+  <text x="325" y="215" class="subtitle">Avanzado</text>
+  <text x="325" y="235" class="week-content">(?&lt;name&gt;)</text>
+  <text x="325" y="250" class="week-content">optimización</text>
+  <text x="325" y="265" class="week-content">seguridad</text>
+  
+  <rect x="455" y="180" width="125" height="95" rx="8" fill="#16213e"/>
+  <text x="470" y="200" class="week-title">Semana 08</text>
+  <text x="470" y="215" class="subtitle">Proyecto Final</text>
+  <text x="470" y="235" class="week-content">casos reales</text>
+  <text x="470" y="250" class="week-content">toolkit</text>
+  <text x="470" y="265" class="week-content">producción</text>
+  
+  <!-- Progress bar -->
+  <rect x="20" y="295" width="560" height="8" rx="4" fill="#16213e"/>
+  <rect x="20" y="295" width="560" height="8" rx="4" fill="#8BC34A"/>
+  <text x="300" y="320" text-anchor="middle" font-family="Arial" font-size="12" fill="#8BC34A">100% Completado</text>
+  
+  <!-- Skills summary -->
+  <text x="30" y="350" font-family="Arial" font-size="13" font-weight="bold" fill="#ffffff">Habilidades Dominadas:</text>
+  
+  <g font-family="Arial" font-size="11" fill="#a0a0a0">
+    <text x="30" y="375">✅ Validación de datos</text>
+    <text x="200" y="375">✅ Extracción de información</text>
+    <text x="420" y="375">✅ Parsing de texto</text>
+    
+    <text x="30" y="395">✅ Transformación de strings</text>
+    <text x="200" y="395">✅ Logs y debugging</text>
+    <text x="420" y="395">✅ Seguridad (ReDoS)</text>
+    
+    <text x="30" y="415">✅ Optimización</text>
+    <text x="200" y="415">✅ Testing de regex</text>
+    <text x="420" y="415">✅ Casos producción</text>
+  </g>
+  
+  <!-- Certificate style footer -->
+  <rect x="150" y="440" width="300" height="45" rx="8" fill="#FF6B35" opacity="0.9"/>
+  <text x="300" y="465" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#1a1a2e">
+    🏆 RegExp Master Certificate
+  </text>
+  <text x="300" y="480" text-anchor="middle" font-family="Arial" font-size="10" fill="#1a1a2e">
+    Zero to Hero - 8 Semanas - 32 Horas
+  </text>
+</svg>
