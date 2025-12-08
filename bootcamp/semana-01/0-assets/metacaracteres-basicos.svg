@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <style>
+      .bg { fill: #1a1a2e; }
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 28px; font-weight: bold; fill: #ffffff; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; fill: #a0a0a0; }
+      .code { font-family: 'Consolas', 'Courier New', monospace; font-size: 18px; fill: #FF6B35; }
+      .code-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; fill: #8BC34A; }
+      .box { fill: #16213e; stroke: #FF6B35; stroke-width: 2; rx: 8; }
+      .box-text { font-family: 'Consolas', monospace; font-size: 14px; fill: #ffffff; }
+      .arrow { stroke: #00BCD4; stroke-width: 2; fill: none; }
+      .arrow-head { fill: #00BCD4; }
+      .accent { fill: #FF6B35; }
+      .accent2 { fill: #00BCD4; }
+      .accent3 { fill: #8BC34A; }
+      .label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; fill: #ffffff; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect class="bg" width="600" height="400"/>
+  
+  <!-- Header -->
+  <text class="title" x="30" y="40">Semana 01: Metacaracteres Básicos</text>
+  <text class="subtitle" x="30" y="65">Fundamentos de Expresiones Regulares</text>
+  
+  <!-- Dot Section -->
+  <rect class="box" x="30" y="90" width="160" height="80"/>
+  <text class="accent" x="110" y="120" text-anchor="middle" font-family="Consolas" font-size="32">.</text>
+  <text class="label" x="110" y="145" text-anchor="middle">DOT</text>
+  <text class="subtitle" x="110" y="160" text-anchor="middle" font-size="10">Cualquier carácter</text>
+  
+  <!-- Caret Section -->
+  <rect class="box" x="220" y="90" width="160" height="80"/>
+  <text class="accent2" x="300" y="120" text-anchor="middle" font-family="Consolas" font-size="32">^</text>
+  <text class="label" x="300" y="145" text-anchor="middle">CARET</text>
+  <text class="subtitle" x="300" y="160" text-anchor="middle" font-size="10">Inicio del string</text>
+  
+  <!-- Dollar Section -->
+  <rect class="box" x="410" y="90" width="160" height="80"/>
+  <text class="accent3" x="490" y="120" text-anchor="middle" font-family="Consolas" font-size="32">$</text>
+  <text class="label" x="490" y="145" text-anchor="middle">DOLLAR</text>
+  <text class="subtitle" x="490" y="160" text-anchor="middle" font-size="10">Fin del string</text>
+  
+  <!-- Example Box -->
+  <rect x="30" y="195" width="540" height="100" fill="#16213e" rx="8"/>
+  <text class="code-label" x="45" y="215">EJEMPLO:</text>
+  <text class="code" x="45" y="245" font-size="22">/^H.la mundo$/</text>
+  
+  <!-- Annotations con flechas -->
+  <line x1="58" y1="255" x2="58" y2="270" stroke="#00BCD4" stroke-width="2"/>
+  <text x="58" y="285" text-anchor="middle" font-family="Arial" font-size="9" fill="#00BCD4">^</text>
+  
+  <line x1="100" y1="255" x2="100" y2="270" stroke="#FF6B35" stroke-width="2"/>
+  <text x="100" y="285" text-anchor="middle" font-family="Arial" font-size="9" fill="#FF6B35">.</text>
+  
+  <line x1="250" y1="255" x2="250" y2="270" stroke="#8BC34A" stroke-width="2"/>
+  <text x="250" y="285" text-anchor="middle" font-family="Arial" font-size="9" fill="#8BC34A">$</text>
+  
+  <!-- Match Result -->
+  <rect x="30" y="310" width="540" height="70" fill="#0d1117" rx="8"/>
+  <text class="code-label" x="45" y="332">MATCHES:</text>
+  <text x="45" y="358" font-family="Consolas" font-size="14" fill="#8BC34A">✓ "Hola mundo"</text>
+  <text x="220" y="358" font-family="Consolas" font-size="14" fill="#8BC34A">✓ "Hela mundo"</text>
+  <text x="400" y="358" font-family="Consolas" font-size="14" fill="#e74c3c">✗ "hola mundo"</text>
+  
+  <!-- Week indicator -->
+  <rect x="520" y="10" width="60" height="25" rx="12" fill="#FF6B35"/>
+  <text x="550" y="28" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#1a1a2e">01/08</text>
+</svg>

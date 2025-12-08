@@ -37,7 +37,7 @@ function validarCodigo(codigo) {
   return {
     codigo: codigo,
     valido: esValido,
-    mensaje: esValido ? "✅ Formato correcto" : "❌ Formato inválido",
+    mensaje: esValido ? '✅ Formato correcto' : '❌ Formato inválido',
   };
 }
 
@@ -56,7 +56,7 @@ function validarCodigoDetallado(codigo) {
     return {
       codigo: codigo,
       valido: false,
-      mensaje: "❌ El código no puede estar vacío",
+      mensaje: '❌ El código no puede estar vacío',
     };
   }
 
@@ -70,11 +70,11 @@ function validarCodigoDetallado(codigo) {
   }
 
   // Validar que tenga guión en posición correcta
-  if (codigo[2] !== "-") {
+  if (codigo[2] !== '-') {
     return {
       codigo: codigo,
       valido: false,
-      mensaje: "❌ Falta el guión en la posición 3",
+      mensaje: '❌ Falta el guión en la posición 3',
     };
   }
 
@@ -82,7 +82,7 @@ function validarCodigoDetallado(codigo) {
   return {
     codigo: codigo,
     valido: true,
-    mensaje: "✅ Formato correcto",
+    mensaje: '✅ Formato correcto',
     partes: {
       prefijo: codigo.substring(0, 2),
       numero: codigo.substring(3),
@@ -94,30 +94,30 @@ function validarCodigoDetallado(codigo) {
 // CASOS DE PRUEBA
 // ============================================
 
-console.log("=== Validación Básica ===\n");
+console.log('=== Validación Básica ===\n');
 
 // Casos válidos
-console.log(validarCodigo("AB-123")); // ✅
-console.log(validarCodigo("XY-999")); // ✅
-console.log(validarCodigo("ZZ-000")); // ✅
+console.log(validarCodigo('AB-123')); // ✅
+console.log(validarCodigo('XY-999')); // ✅
+console.log(validarCodigo('ZZ-000')); // ✅
 
-console.log("\n--- Casos inválidos ---\n");
+console.log('\n--- Casos inválidos ---\n');
 
 // Casos inválidos
-console.log(validarCodigo("ABC-123")); // ❌ 3 letras
-console.log(validarCodigo("A-123")); // ❌ 1 letra
-console.log(validarCodigo("AB123")); // ❌ sin guión
-console.log(validarCodigo("AB-12")); // ❌ 2 dígitos
-console.log(validarCodigo("AB-1234")); // ❌ 4 dígitos
-console.log(validarCodigo("")); // ❌ vacío
+console.log(validarCodigo('ABC-123')); // ❌ 3 letras
+console.log(validarCodigo('A-123')); // ❌ 1 letra
+console.log(validarCodigo('AB123')); // ❌ sin guión
+console.log(validarCodigo('AB-12')); // ❌ 2 dígitos
+console.log(validarCodigo('AB-1234')); // ❌ 4 dígitos
+console.log(validarCodigo('')); // ❌ vacío
 
-console.log("\n=== Validación Detallada ===\n");
+console.log('\n=== Validación Detallada ===\n');
 
 // Pruebas con versión detallada
-console.log(validarCodigoDetallado("AB-123"));
-console.log(validarCodigoDetallado(""));
-console.log(validarCodigoDetallado("ABC-123"));
-console.log(validarCodigoDetallado("AB123"));
+console.log(validarCodigoDetallado('AB-123'));
+console.log(validarCodigoDetallado(''));
+console.log(validarCodigoDetallado('ABC-123'));
+console.log(validarCodigoDetallado('AB123'));
 
 // ============================================
 // EXTENSIÓN: Validadores adicionales
@@ -149,19 +149,19 @@ const sucursalPattern = /^S-...$/;
  */
 function validarCodigoUniversal(codigo) {
   if (codigoPattern.test(codigo)) {
-    return { tipo: "producto", valido: true, codigo };
+    return { tipo: 'producto', valido: true, codigo };
   }
   if (categoriaPattern.test(codigo)) {
-    return { tipo: "categoria", valido: true, codigo };
+    return { tipo: 'categoria', valido: true, codigo };
   }
   if (sucursalPattern.test(codigo)) {
-    return { tipo: "sucursal", valido: true, codigo };
+    return { tipo: 'sucursal', valido: true, codigo };
   }
-  return { tipo: "desconocido", valido: false, codigo };
+  return { tipo: 'desconocido', valido: false, codigo };
 }
 
-console.log("\n=== Validador Universal ===\n");
-console.log(validarCodigoUniversal("AB-123")); // producto
-console.log(validarCodigoUniversal("CAT-05")); // categoria
-console.log(validarCodigoUniversal("S-001")); // sucursal
-console.log(validarCodigoUniversal("XYZ")); // desconocido
+console.log('\n=== Validador Universal ===\n');
+console.log(validarCodigoUniversal('AB-123')); // producto
+console.log(validarCodigoUniversal('CAT-05')); // categoria
+console.log(validarCodigoUniversal('S-001')); // sucursal
+console.log(validarCodigoUniversal('XYZ')); // desconocido

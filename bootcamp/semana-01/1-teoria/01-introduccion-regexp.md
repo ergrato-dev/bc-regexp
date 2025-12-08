@@ -1,5 +1,9 @@
 # Semana 01: Introducción a las Expresiones Regulares
 
+<p align="center">
+  <img src="../0-assets/metacaracteres-basicos.svg" alt="Metacaracteres Básicos" width="100%">
+</p>
+
 ## ¿Qué son las Expresiones Regulares?
 
 Las **expresiones regulares** (Regular Expressions o **RegExp**) son patrones de búsqueda que describen conjuntos de cadenas de texto. Son una herramienta fundamental en programación para:
