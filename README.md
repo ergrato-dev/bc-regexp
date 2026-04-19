@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="_assets/banner-regexp-bootcamp.svg" alt="Bootcamp RegExp - De Zero a Hero" width="100%">
+  <img src="assets/banner-regexp-bootcamp.svg" alt="Bootcamp RegExp - De Zero a Hero" width="100%">
 </p>
 
 # 🎯 Bootcamp de Expresiones Regulares
@@ -27,11 +27,11 @@ Domina las **expresiones regulares (RegExp)** desde los fundamentos hasta técni
 
 ```
 bc-regexp/
-├── 📂 _assets/            # Recursos globales (imágenes, SVGs)
+├── 📂 assets/             # Recursos globales (imágenes, SVGs)
 ├── 📂 _docs/              # Documentación general
 ├── 📂 _scripts/           # Scripts de utilidad
 └── 📂 bootcamp/
-    └── 📂 semana-XX/
+    └── 📂 week-XX-tema_principal/
         ├── 📂 0-assets/       # Recursos de la semana
         ├── 📂 1-teoria/       # Contenido teórico
         ├── 📂 2-ejercicios/   # Ejercicios prácticos
@@ -60,7 +60,7 @@ bc-regexp/
 2. **Navega a la semana actual**
 
    ```bash
-   cd bootcamp/semana-01
+   cd bootcamp/week-01-fundamentos_y_metacaracteres
    ```
 
 3. **Sigue el orden sugerido**

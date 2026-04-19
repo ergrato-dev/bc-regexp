@@ -120,6 +120,6 @@ En 8 semanas has pasado de cero conocimiento a dominar:
 
 ---
 
-**Anterior:** [Semana 07 - Patrones Avanzados](../semana-07/)
+**Anterior:** [Semana 07 - Patrones Avanzados](../week-07-patrones_avanzados/)
 
 **Inicio:** [README Principal](../../README.md)

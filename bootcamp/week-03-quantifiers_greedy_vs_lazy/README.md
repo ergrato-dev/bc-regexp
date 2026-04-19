@@ -103,6 +103,6 @@ Al finalizar esta semana serás capaz de:
 
 ---
 
-**Anterior:** [Semana 02 - Character Classes](../semana-02/)
+**Anterior:** [Semana 02 - Character Classes](../week-02-character_classes/)
 
-**Siguiente:** [Semana 04 - Grupos y Capturas](../semana-04/)
+**Siguiente:** [Semana 04 - Grupos y Capturas](../week-04-grupos_y_backreferences/)

@@ -100,6 +100,6 @@ Al finalizar esta semana serás capaz de:
 
 ---
 
-**Anterior:** [Semana 01 - Fundamentos](../semana-01/)
+**Anterior:** [Semana 01 - Fundamentos](../week-01-fundamentos_y_metacaracteres/)
 
-**Siguiente:** [Semana 03 - Cuantificadores](../semana-03/)
+**Siguiente:** [Semana 03 - Cuantificadores](../week-03-quantifiers_greedy_vs_lazy/)

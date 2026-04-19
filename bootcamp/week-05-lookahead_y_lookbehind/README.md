@@ -116,6 +116,6 @@ Al finalizar esta semana serás capaz de:
 
 ---
 
-**Anterior:** [Semana 04 - Grupos y Capturas](../semana-04/)
+**Anterior:** [Semana 04 - Grupos y Capturas](../week-04-grupos_y_backreferences/)
 
-**Siguiente:** [Semana 06 - Flags y Modificadores](../semana-06/)
+**Siguiente:** [Semana 06 - Flags y Modificadores](../week-06-flags_y_modificadores/)

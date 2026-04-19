@@ -127,6 +127,6 @@ for (const m of 'a@b.com'.matchAll(/(\w+)@/g)) {
 
 ---
 
-**Anterior:** [Semana 05 - Lookahead y Lookbehind](../semana-05/)
+**Anterior:** [Semana 05 - Lookahead y Lookbehind](../week-05-lookahead_y_lookbehind/)
 
-**Siguiente:** [Semana 07 - Patrones Avanzados](../semana-07/)
+**Siguiente:** [Semana 07 - Patrones Avanzados](../week-07-patrones_avanzados/)

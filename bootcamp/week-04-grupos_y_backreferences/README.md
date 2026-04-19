@@ -109,6 +109,6 @@ for (const m of texto.matchAll(/(\w+)@(\w+)/g)) {
 
 ---
 
-**Anterior:** [Semana 03 - Quantifiers](../semana-03/)
+**Anterior:** [Semana 03 - Quantifiers](../week-03-quantifiers_greedy_vs_lazy/)
 
-**Siguiente:** [Semana 05 - Lookahead y Lookbehind](../semana-05/)
+**Siguiente:** [Semana 05 - Lookahead y Lookbehind](../week-05-lookahead_y_lookbehind/)

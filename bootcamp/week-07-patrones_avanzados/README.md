@@ -136,6 +136,6 @@ function safeMatch(text, pattern, maxLen = 1000) {
 
 ---
 
-**Anterior:** [Semana 06 - Flags y Modificadores](../semana-06/)
+**Anterior:** [Semana 06 - Flags y Modificadores](../week-06-flags_y_modificadores/)
 
-**Siguiente:** [Semana 08 - Proyecto Final](../semana-08/)
+**Siguiente:** [Semana 08 - Proyecto Final](../week-08-proyecto_final/)

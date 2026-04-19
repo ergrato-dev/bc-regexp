@@ -81,4 +81,4 @@ Al finalizar esta semana serás capaz de:
 
 ---
 
-**Siguiente:** [Semana 02 - Character Classes](../semana-02/)
+**Siguiente:** [Semana 02 - Character Classes](../week-02-character_classes/)

@@ -10,11 +10,11 @@ Este es un **bootcamp de Expresiones Regulares (RegExp)** de zero to hero, dise�
 bc-regexp/
 ├── .github/           # Configuración de GitHub y Copilot
 ├── .vscode/           # Configuración del editor
-├── _assets/           # Recursos globales (imágenes, diagramas)
+├── assets/            # Recursos globales (imágenes, diagramas)
 ├── _docs/             # Documentación general del bootcamp
 ├── _scripts/          # Scripts de utilidad
 ├── bootcamp/
-│   └── semana-XX/     # Contenido por semana
+│   └── week-XX-tema_principal/     # Contenido por semana
 │       ├── 0-assets/      # Recursos de la semana
 │       ├── 1-teoria/      # Contenido teórico
 │       ├── 2-ejercicios/  # Ejercicios prácticos
