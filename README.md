@@ -44,9 +44,20 @@ bc-regexp/
 
 | Herramienta | Descripción                     | Enlace                               |
 | ----------- | ------------------------------- | ------------------------------------ |
-| regex101    | Tester online con explicaciones | [regex101.com](https://regex101.com) |
+| regex101    | Tester online (soporta JS y Python) | [regex101.com](https://regex101.com) |
 | RegExr      | Visualizador interactivo        | [regexr.com](https://regexr.com)     |
 | Debuggex    | Diagramas de flujo              | [debuggex.com](https://debuggex.com) |
+
+## 💻 Lenguajes Soportados
+
+Elige el lenguaje con el que te sientas más cómodo:
+
+| Lenguaje   | Módulo/Métodos            | Teoría                                                |
+| ---------- | ------------------------- | ----------------------------------------------------- |
+| JavaScript | `test()`, `match()`, etc. | [Métodos JS](bootcamp/week-01-fundamentos_y_metacaracteres/1-teoria/02-metodos-javascript.md) |
+| Python     | `re.search()`, `re.sub()` | [Métodos Python](bootcamp/week-01-fundamentos_y_metacaracteres/1-teoria/03-metodos-python.md) |
+
+La sintaxis de las expresiones regulares es la misma en ambos lenguajes. Solo cambian los métodos usados para aplicarlas.
 
 ## 🚀 Cómo Empezar
 
@@ -80,8 +91,9 @@ bc-regexp/
 
 ## 🎓 Requisitos Previos
 
-- Conocimientos básicos de programación
+- Conocimientos básicos de programación (JavaScript o Python)
 - Editor de código (VS Code recomendado)
+- Node.js o Python instalado
 - Ganas de aprender 💪
 
 ## 📝 Licencia

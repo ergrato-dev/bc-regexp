@@ -1,5 +1,9 @@
 # Proyecto Semana 06: Buscador de Texto Avanzado
 
+> **Lenguaje:** Elige **JavaScript** o **Python** para tu implementación.
+> - **JavaScript:** `/patron/gi` — flags inline. Métodos: `.match()`, `.matchAll()`, `.replace()`
+> - **Python:** `re.compile(r'patron', re.IGNORECASE | re.MULTILINE)` — flags como constantes. Métodos: `.findall()`, `.finditer()`, `.sub()`
+
 ## 🎯 Objetivo
 
 Crear un **buscador de texto avanzado** que utilice todos los flags disponibles para ofrecer búsquedas flexibles y potentes.
@@ -18,6 +22,7 @@ Construirás un motor de búsqueda que pueda:
 
 ### Paso 1: Configuración Base
 
+**JavaScript:**
 ```javascript
 /**
  * Configuración del buscador
@@ -32,8 +37,23 @@ const SearchConfig = {
 };
 ```
 
+**Python:**
+```python
+import re
+
+SearchConfig = {
+    'caseSensitive': False,   # re.IGNORECASE
+    'wholeWord': False,       # \b word boundaries
+    'multiline': True,        # re.MULTILINE
+    'dotAll': False,          # re.DOTALL
+    'unicode': True,          # Python 3 re es Unicode por defecto
+    'showIndices': True,      # match.start() / match.end()
+}
+```
+
 ### Paso 2: Motor de Búsqueda
 
+**JavaScript:**
 ```javascript
 /**
  * Motor de búsqueda principal
@@ -56,8 +76,22 @@ function buscar(texto, query, opciones = {}) {
 }
 ```
 
+**Python:**
+```python
+def buscar(texto, query, opciones=None):
+    config = {**SearchConfig, **(opciones or {})}
+    return {
+        'matches': [],    # Array de coincidencias
+        'total': 0,       # Número total
+        'positions': [],  # Posiciones [start, end]
+        'highlighted': '',# Texto con resaltado
+        'stats': {},      # Estadísticas
+    }
+```
+
 ### Paso 3: Construir el Patrón
 
+**JavaScript:**
 ```javascript
 /**
  * Construir regex con flags apropiados
@@ -88,8 +122,27 @@ function escapeRegExp(string) {
 }
 ```
 
+**Python:**
+```python
+import re
+
+def build_pattern(query, config):
+    pattern = re.escape(query)
+    if config['wholeWord']:
+        pattern = rf'\b{pattern}\b'
+    flags = 0  # Siempre global en findall/finditer
+    if not config['caseSensitive']:
+        flags |= re.IGNORECASE
+    if config['multiline']:
+        flags |= re.MULTILINE
+    if config['dotAll']:
+        flags |= re.DOTALL
+    return re.compile(pattern, flags)
+```
+
 ### Paso 4: Resaltador de Texto
 
+**JavaScript:**
 ```javascript
 /**
  * Resaltar coincidencias en el texto
@@ -103,8 +156,15 @@ function highlight(texto, pattern) {
 }
 ```
 
+**Python:**
+```python
+def highlight(texto, pattern):
+    return pattern.sub(r'[[MATCH]]\g<0>[[/MATCH]]', texto)
+```
+
 ### Paso 5: Búsqueda Avanzada
 
+**JavaScript:**
 ```javascript
 /**
  * Búsqueda con sintaxis avanzada
@@ -119,6 +179,13 @@ function highlight(texto, pattern) {
 function busquedaAvanzada(texto, queryString) {
   // Tu implementación
 }
+```
+
+**Python:**
+```python
+def busqueda_avanzada(texto, query_string):
+    # Tu implementación
+    pass
 ```
 
 ## 💡 Hints
@@ -170,8 +237,10 @@ function parseQuery(queryString) {
 ```
 3-proyecto/
 ├── proyecto-06-buscador.md      (este archivo)
-├── buscador.js                   (tu solución)
-├── test-buscador.js              (tests)
+├── buscador.js                   (solución JavaScript)
+├── buscador.py                   (solución Python)
+├── test-buscador.js              (tests JavaScript)
+├── test_buscador.py              (tests Python)
 └── demo.html                     (opcional: demo visual)
 ```
 
@@ -219,4 +288,5 @@ function buscarConCache(texto, query, opciones) {
 
 ---
 
-**Solución:** Disponible en `solucion-proyecto-06.js`
+**Solución JavaScript:** Disponible en `solucion-proyecto-06.js`
+**Solución Python:** Disponible en `solucion-proyecto-06.py`

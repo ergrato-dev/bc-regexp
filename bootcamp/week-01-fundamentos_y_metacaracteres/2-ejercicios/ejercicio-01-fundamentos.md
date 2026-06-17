@@ -3,7 +3,7 @@
 ## Instrucciones Generales
 
 - Usa [regex101.com](https://regex101.com) para probar tus patrones
-- Selecciona "JavaScript" como flavor
+- Selecciona "JavaScript" o "Python" como flavor según tu lenguaje de programación
 - Intenta resolver sin ver las soluciones
 - Cada ejercicio incluye hints si te atascas
 

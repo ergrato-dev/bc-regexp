@@ -33,6 +33,25 @@ console.log(contarPalabra(texto, 'is')); // 2
 console.log(contarPalabra(texto, 'PYTHON')); // 0
 ```
 
+**Python:**
+
+```python
+import re
+
+texto = """JavaScript is a programming language. javascript is used for web development.
+Many developers love JavaScript. JAVASCRIPT powers many websites."""
+
+def contar_palabra(texto, palabra):
+    escapada = re.escape(palabra)
+    pattern = re.compile(rf'\b{escapada}\b', re.IGNORECASE)
+    matches = pattern.findall(texto)
+    return len(matches) if matches else 0
+
+print(contar_palabra(texto, 'javascript'))  # 4
+print(contar_palabra(texto, 'is'))          # 2
+print(contar_palabra(texto, 'PYTHON'))      # 0
+```
+
 ---
 
 ## Ejercicio 2: Extraer Comentarios Multilínea
@@ -83,6 +102,40 @@ function extraerComentarios(code) {
 
 console.log(extraerComentarios(codigo));
 // ['Este es un\n   comentario\n   multilínea', 'Otro comentario']
+```
+
+**Python:**
+
+```python
+import re
+
+codigo = """const x = 1;
+/* Este es un
+   comentario
+   multilínea */
+const y = 2;
+/* Otro comentario */
+const z = 3;"""
+
+# Con flag DOTALL (equivalente a s)
+pattern = re.compile(r'/\*.*?\*/', re.DOTALL)
+
+print(pattern.findall(codigo))
+# [
+#   '/* Este es un\n   comentario\n   multilínea */',
+#   '/* Otro comentario */'
+# ]
+
+# Función para extraer solo el contenido (sin /* */)
+def extraer_comentarios(code):
+    pattern = re.compile(r'/\*(.*?)\*/', re.DOTALL)
+    comentarios = []
+    for match in pattern.finditer(code):
+        comentarios.append(match.group(1).strip())
+    return comentarios
+
+print(extraer_comentarios(codigo))
+# ['Este es un\n   comentario\n   multilínea', 'Otro comentario']
 ```
 
 ---
@@ -138,6 +191,30 @@ console.log(parseConfig(config));
 // }
 ```
 
+**Python:**
+
+```python
+import re
+
+config = """# Configuración de la app
+nombre=MiApp
+version=1.0.0
+# Puerto del servidor
+puerto=3000
+debug=true"""
+
+pattern = re.compile(r'^(?!#)(\w+)=(.+)$', re.MULTILINE)
+
+def parse_config(texto):
+    config = {}
+    for match in pattern.finditer(texto):
+        config[match.group(1)] = match.group(2)
+    return config
+
+print(parse_config(config))
+# {'nombre': 'MiApp', 'version': '1.0.0', 'puerto': '3000', 'debug': 'true'}
+```
+
 ---
 
 ## Ejercicio 4: Validar Texto Internacional
@@ -191,6 +268,33 @@ nombres.forEach((nombre) => {
 const latinPattern = /^[\p{Script=Latin}\s]+$/u;
 console.log(latinPattern.test('José García')); // true
 console.log(latinPattern.test('北京市')); // false
+```
+
+**Python:**
+
+```python
+import re
+
+nombres = [
+    'José García', '北京市', 'Москва', 'محمد أحمد',
+    'João', '123Invalid', ''
+]
+
+# Python 3 usa Unicode por defecto, no necesita flag u
+pattern = re.compile(r'^[\p{Letter}\s]+$')  # ⚠️ `\p{Letter}` no es soportado por re
+# Alternativa: usar regex module (pip install regex)
+# import regex
+# pattern = regex.compile(r'^[\p{Letter}\s]+$')
+# O usar categorías Unicode con re:
+# pattern = re.compile(r'^[^\W\d_\s][\w\s-]*$', re.UNICODE)
+
+def validar_nombre(nombre):
+    if not nombre:
+        return False
+    return bool(pattern.search(nombre)) if pattern else False
+
+# Nota: para Unicode property escapes (\p{...}) en Python,
+# instala `regex` (pip install regex) que es compatible con PCRE/JS
 ```
 
 ---
@@ -264,6 +368,44 @@ const tokensNoSpace = tokenize(expresion).filter((t) => t.type !== 'space');
 console.log(tokensNoSpace);
 ```
 
+**Python:**
+
+```python
+import re
+
+expresion = '123 + 456 * 789'
+
+# Python no tiene flag sticky (y), se simula con posición
+def tokenize(inp):
+    token_defs = [
+        ('NUMBER', r'\d+'),
+        ('OPERATOR', r'[+\-*/]'),
+        ('SPACE', r'\s+'),
+    ]
+    tokens = []
+    pos = 0
+    while pos < len(inp):
+        matched = False
+        for ttype, tpat in token_defs:
+            m = re.compile(tpat).match(inp, pos)
+            if m:
+                tokens.append({'type': ttype, 'value': m.group()})
+                pos += len(m.group())
+                matched = True
+                break
+        if not matched:
+            raise ValueError(f'Token inesperado en posición {pos}: "{inp[pos]}"')
+    return tokens
+
+print(tokenize(expresion))
+# [
+#   {'type': 'NUMBER', 'value': '123'},
+#   {'type': 'SPACE', 'value': ' '},
+#   {'type': 'OPERATOR', 'value': '+'},
+#   ...
+# ]
+```
+
 ---
 
 ## Ejercicio 6: Índices de Grupos
@@ -328,6 +470,50 @@ console.log(extraerPosiciones(texto));
 // }
 ```
 
+**Python:**
+
+```python
+import re
+
+texto = 'Email: usuario@dominio.com'
+
+pattern = re.compile(r'(\w+)@(\w+)\.(\w+)')
+
+match = pattern.search(texto)
+
+print('Match completo:', match.group(0))
+print('Posiciones:', match.span())
+
+def extraer_posiciones(texto):
+    match = pattern.search(texto)
+    if not match:
+        return None
+    return {
+        'usuario': {
+            'valor': match.group(1),
+            'start': match.start(1),
+            'end': match.end(1),
+        },
+        'dominio': {
+            'valor': match.group(2),
+            'start': match.start(2),
+            'end': match.end(2),
+        },
+        'extension': {
+            'valor': match.group(3),
+            'start': match.start(3),
+            'end': match.end(3),
+        },
+    }
+
+print(extraer_posiciones(texto))
+# {
+#   'usuario': {'valor': 'usuario', 'start': 7, 'end': 14},
+#   'dominio': {'valor': 'dominio', 'start': 15, 'end': 22},
+#   'extension': {'valor': 'com', 'start': 23, 'end': 26}
+# }
+```
+
 ---
 
 ## Ejercicio 7: Búsqueda con Emojis
@@ -386,6 +572,39 @@ function emojiToText(texto) {
 
 console.log(emojiToText(texto));
 // "Hola :wave: amigo! Cómo estás? :smile: Espero que bien :party: Nos vemos :thumbsup:"
+```
+
+**Python:**
+
+```python
+import re
+
+texto = 'Hola 👋 amigo! Cómo estás? 😀 Espero que bien 🎉 Nos vemos 👍'
+
+# ⚠️ \p{Extended_Pictographic} requiere módulo `regex`
+# pip install regex
+import regex  # noqa: E402
+
+emoji_pattern = regex.compile(r'\p{Extended_Pictographic}')
+
+def analizar_emojis(texto):
+    matches = emoji_pattern.findall(texto) or []
+    unicos = list(set(matches))
+    return {
+        'total': len(matches),
+        'emojis': matches,
+        'unicos': len(unicos),
+        'frecuencia': {e: matches.count(e) for e in unicos},
+    }
+
+print(analizar_emojis(texto))
+# {'total': 4, 'emojis': ['👋', '😀', '🎉', '👍'], 'unicos': 4, ...}
+
+def emoji_to_text(texto):
+    mapa = {'👋': ':wave:', '😀': ':smile:', '🎉': ':party:', '👍': ':thumbsup:'}
+    return emoji_pattern.sub(lambda m: mapa.get(m.group(), m.group()), texto)
+
+print(emoji_to_text(texto))
 ```
 
 ---
@@ -468,6 +687,58 @@ function searchLogs(logs, term) {
 
 console.log("\n=== Logs con 'connection' ===");
 console.log(searchLogs(parsed, 'connection'));
+```
+
+**Python:**
+
+```python
+import re
+
+logs = """2024-01-15 10:30:45 [INFO] Server started on port 3000
+2024-01-15 10:30:46 [DEBUG] Loading config file...
+/* Multi-line
+   debug info */
+2024-01-15 10:30:47 [ERROR] Connection failed:
+  Host: localhost
+  Port: 5432
+2024-01-15 10:30:48 [warning] Low memory
+2024-01-15 10:30:49 [INFO] Retrying connection..."""
+
+def parse_logs(texto):
+    # Remover comentarios multilínea
+    sin_comentarios = re.sub(r'/\*[\s\S]*?\*/', '', texto)
+
+    pattern = re.compile(
+        r'^(\d{4}-\d{2}-\d{2})\s+(\d{2}:\d{2}:\d{2})\s+\[(\w+)\]\s+'
+        r'([\s\S]+?)(?=^\d{4}-\d{2}-\d{2}|\Z)',
+        re.IGNORECASE | re.MULTILINE
+    )
+
+    entries = []
+    for match in pattern.finditer(sin_comentarios):
+        entries.append({
+            'date': match.group(1),
+            'time': match.group(2),
+            'level': match.group(3).upper(),
+            'message': re.sub(r'\n\s+', ' ', match.group(4).strip()),
+        })
+    return entries
+
+parsed = parse_logs(logs)
+print(parsed)
+
+def filter_by_level(logs, level):
+    return [l for l in logs if l['level'] == level.upper()]
+
+print('\n=== ERRORES ===')
+print(filter_by_level(parsed, 'error'))
+
+def search_logs(logs, term):
+    pattern = re.compile(term, re.IGNORECASE)
+    return [l for l in logs if pattern.search(l['message'])]
+
+print("\n=== Logs con 'connection' ===")
+print(search_logs(parsed, 'connection'))
 ```
 
 ---

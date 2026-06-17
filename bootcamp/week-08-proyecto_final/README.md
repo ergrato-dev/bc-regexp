@@ -12,6 +12,7 @@ Al finalizar esta semana serás capaz de:
 - Resolver casos reales de la industria
 - Crear una librería de patrones reutilizable
 - Dominar debugging y testing de regex
+- Implementar el toolkit tanto en JavaScript como en Python
 
 ## 📚 Contenido
 
@@ -33,7 +34,8 @@ Al finalizar esta semana serás capaz de:
 | Archivo                                                             | Descripción                       |
 | ------------------------------------------------------------------- | --------------------------------- |
 | [proyecto-final.md](3-proyecto/proyecto-final.md)                   | RegEx Toolkit - Librería completa |
-| [solucion-proyecto-final.js](3-proyecto/solucion-proyecto-final.js) | Implementación de referencia      |
+| [solucion-proyecto-final.js](3-proyecto/solucion-proyecto-final.js) | Implementación de referencia (JavaScript) |
+| [solucion-proyecto-final.py](3-proyecto/solucion-proyecto-final.py) | Implementación de referencia (Python)     |
 
 ### Recursos y Glosario
 
@@ -69,8 +71,8 @@ Al finalizar esta semana serás capaz de:
 ## ✅ Checklist Final
 
 - [ ] Revisar resumen del bootcamp
-- [ ] Completar ejercicios finales
-- [ ] Implementar el proyecto RegEx Toolkit
+- [ ] Completar ejercicios finales (JavaScript o Python)
+- [ ] Implementar el proyecto RegEx Toolkit (JavaScript o Python)
 - [ ] Crear tests para validadores
 - [ ] Documentar la librería
 - [ ] ¡Celebrar! 🎉

@@ -49,6 +49,36 @@ const pattern4 = /file\d*/g;
 // Matches: file, file1, file12, file123
 ```
 
+**Python:**
+
+```python
+import re
+
+# Tarea 1: "color" y "colour" (u opcional)
+# ¿Por qué? La palabra tiene dos variantes válidas
+# ¿Para qué? Aceptar ambas ortografías
+pattern1 = re.compile(r'colou?r')
+# pattern1.findall(texto) → color, colour
+
+# Tarea 2: "http" y "https" (s opcional)
+# ¿Por qué? Protocolos web pueden ser seguros o no
+# ¿Para qué? Validar URLs con ambos protocolos
+pattern2 = re.compile(r'https?')
+# pattern2.findall(texto) → http, https
+
+# Tarea 3: "file" + uno o más dígitos
+# ¿Por qué? Archivos numerados deben tener al menos un número
+# ¿Para qué? Encontrar archivos con índice
+pattern3 = re.compile(r'file\d+')
+# pattern3.findall(texto) → file1, file12, file123
+
+# Tarea 4: "file" + cero o más dígitos
+# ¿Por qué? Incluir archivos sin numeración
+# ¿Para qué? Capturar todos los archivos del patrón
+pattern4 = re.compile(r'file\d*')
+# pattern4.findall(texto) → file, file1, file12, file123
+```
+
 ---
 
 ## Ejercicio 02: Quantifiers con Llaves
@@ -96,6 +126,36 @@ const pattern4 = /\b[A-Z]{2}\d{3}\b/g;
 // NO matchea: AB1, AB12, AB1234
 ```
 
+**Python:**
+
+```python
+import re
+
+# Tarea 1: Exactamente 5 dígitos
+# ¿Por qué? Códigos postales tienen exactamente 5 dígitos
+# ¿Para qué? Validar sin capturar números más largos
+pattern1 = re.compile(r'\b\d{5}\b')
+# pattern1.findall(texto) → 12345
+
+# Tarea 2: 3 a 5 dígitos
+# ¿Por qué? Algunos códigos tienen longitud variable
+# ¿Para qué? Flexibilidad en validación
+pattern2 = re.compile(r'\b\d{3,5}\b')
+# pattern2.findall(texto) → 123, 1234, 12345
+
+# Tarea 3: Al menos 4 dígitos
+# ¿Por qué? Mínimo requerido sin máximo
+# ¿Para qué? IDs que crecen con el tiempo
+pattern3 = re.compile(r'\b\d{4,}\b')
+# pattern3.findall(texto) → 1234, 12345, 123456, 1234567
+
+# Tarea 4: 2 letras + 3 dígitos
+# ¿Por qué? Códigos con prefijo fijo
+# ¿Para qué? Validar códigos de producto
+pattern4 = re.compile(r'\b[A-Z]{2}\d{3}\b')
+# pattern4.findall(texto) → AB123
+```
+
 ---
 
 ## Ejercicio 03: Greedy vs Lazy
@@ -135,6 +195,35 @@ const textoSolo = /<p>(.*?)<\/p>/g;
 const matches = [...html.matchAll(textoSolo)];
 const textos = matches.map((m) => m[1]);
 // ['Párrafo 1', 'Párrafo 2', 'Párrafo 3']
+```
+
+**Python:**
+
+```python
+import re
+
+html = '<p>Párrafo 1</p><p>Párrafo 2</p><p>Párrafo 3</p>'
+
+# Tarea 1: Captura TODO (greedy)
+# ¿Por qué? .* captura todo hasta el último </p>
+# ¿Para qué? Cuando queremos el bloque completo
+greedy = re.compile(r'<p>.*</p>')
+greedy.findall(html)
+# ['<p>Párrafo 1</p><p>Párrafo 2</p><p>Párrafo 3</p>']
+
+# Tarea 2: Captura CADA párrafo (lazy)
+# ¿Por qué? .*? captura lo mínimo hasta el primer </p>
+# ¿Para qué? Extraer elementos individuales
+lazy = re.compile(r'<p>.*?</p>')
+lazy.findall(html)
+# ['<p>Párrafo 1</p>', '<p>Párrafo 2</p>', '<p>Párrafo 3</p>']
+
+# Tarea 3: Solo el texto (sin tags)
+# ¿Por qué? El grupo (.*?) captura solo el contenido
+# ¿Para qué? Extraer el texto limpio
+texto_solo = re.compile(r'<p>(.*?)</p>')
+textos = texto_solo.findall(html)
+# ['Párrafo 1', 'Párrafo 2', 'Párrafo 3']
 ```
 
 ---
@@ -204,6 +293,56 @@ username.test('ab'); // false (2)
 username.test('este_username_es_muy_largo'); // false (27)
 ```
 
+**Python:**
+
+```python
+import re
+
+# 1. Código postal español (5 dígitos)
+# ¿Por qué? Los CP españoles tienen exactamente 5 dígitos
+# ¿Para qué? Validar direcciones
+codigo_postal = re.compile(r'^\d{5}$')
+bool(codigo_postal.search('28001'))  # True
+bool(codigo_postal.search('2800'))   # False
+bool(codigo_postal.search('280011')) # False
+
+# 2. Teléfono español (9 dígitos, empieza con 6-9)
+# ¿Por qué? Móviles 6/7, fijos 9, servicios 8
+# ¿Para qué? Validar números de contacto
+telefono = re.compile(r'^[6-9]\d{8}$')
+bool(telefono.search('612345678'))  # True
+bool(telefono.search('912345678'))  # True
+bool(telefono.search('12345678'))   # False
+bool(telefono.search('6123456789')) # False
+
+# 3. DNI español (8 dígitos + 1 letra)
+# ¿Por qué? Formato estándar de identificación
+# ¿Para qué? Validar documentos de identidad
+dni = re.compile(r'^\d{8}[A-Z]$')
+bool(dni.search('12345678A'))  # True
+bool(dni.search('00000000Z'))  # True
+bool(dni.search('1234567A'))   # False
+bool(dni.search('123456789A')) # False
+
+# 4. Contraseña (8-16 caracteres alfanuméricos)
+# ¿Por qué? Seguridad básica por longitud
+# ¿Para qué? Validar registro de usuarios
+password = re.compile(r'^[a-zA-Z0-9]{8,16}$')
+bool(password.search('Pass1234'))    # True (8)
+bool(password.search('MiClave123456')) # True (13)
+bool(password.search('Pass1'))       # False (5)
+bool(password.search('EstaContraseñaEsDemasiadoLarga123')) # False (35)
+
+# 5. Username (3-15 caracteres: letras, números, _)
+# ¿Por qué? Identificadores de usuario estándar
+# ¿Para qué? Validar nombres de cuenta
+username = re.compile(r'^\w{3,15}$')
+bool(username.search('user'))       # True
+bool(username.search('user_123'))   # True
+bool(username.search('ab'))         # False (2)
+bool(username.search('este_username_es_muy_largo')) # False (27)
+```
+
 ---
 
 ## Ejercicio 05: Extracción de Datos
@@ -267,6 +406,46 @@ const lineas = texto.match(/- \w+/g);
 const productos2 = lineas.map((l) => l.replace('- ', ''));
 ```
 
+**Python:**
+
+```python
+import re
+
+texto = """Productos:
+- Laptop: $999.99
+- Mouse: $29.50
+- Teclado: $149
+- Monitor: $399.00
+
+Contacto: email@example.com, otro.email@dominio.es
+Teléfono: 612-345-678 o 91 234 56 78"""
+
+# Tarea 1: Extraer precios
+# ¿Por qué? Los precios pueden tener o no decimales
+# ¿Para qué? Calcular totales, mostrar en UI
+precios = re.findall(r'\$\d+(\.\d{2})?', texto)
+# ['$999.99', '$29.50', '$149', '$399.00']
+
+# Tarea 2: Extraer emails
+# ¿Por qué? Emails tienen formato usuario@dominio.ext
+# ¿Para qué? Validar/extraer contactos
+emails = re.findall(r'[\w.-]+@[\w.-]+\.\w+', texto)
+# ['email@example.com', 'otro.email@dominio.es']
+
+# Tarea 3: Extraer teléfonos
+# ¿Por qué? Los teléfonos pueden tener diferentes formatos
+# ¿Para qué? Normalizar números de contacto
+telefonos = re.findall(r'\d{2,3}[\s-]?\d{3}[\s-]?\d{2,3}[\s-]?\d{2,3}', texto)
+# ['612-345-678', '91 234 56 78']
+
+# Tarea 4: Extraer nombres de productos
+# ¿Por qué? Los productos están después de "- "
+# ¿Para qué? Listar inventario
+lineas = re.findall(r'- \w+', texto)
+productos = [l.replace('- ', '') for l in lineas]
+# ['Laptop', 'Mouse', 'Teclado', 'Monitor']
+```
+
 ---
 
 ## Ejercicio 06: Alternativa a Lazy
@@ -307,6 +486,30 @@ texto.match(negacion); // ['"primera"', '"segunda"', '"tercera"']
  * - Sin backtracking (más eficiente)
  * - Más fácil de depurar
  */
+```
+
+**Python:**
+
+```python
+import re
+
+texto = '"primera" y "segunda" y "tercera"'
+
+# Opción 1: Lazy quantifier
+# ¿Por qué? .*? captura lo mínimo
+# ¿Para qué? Solución rápida y común
+lazy = re.findall(r'".*?"', texto)
+# ['"primera"', '"segunda"', '"tercera"']
+
+# Opción 2: Negación
+# ¿Por qué? [^"]* captura todo excepto comillas
+# ¿Para qué? Más explícito y eficiente
+negacion = re.findall(r'"[^"]*"', texto)
+# ['"primera"', '"segunda"', '"tercera"']
+
+# Comparación:
+# Lazy (.*?): Más corto, usa backtracking
+# Negación ([^"]*): Más explícito, sin backtracking, más eficiente
 ```
 
 ---
@@ -373,6 +576,52 @@ const conteo = logsParseados.reduce((acc, log) => {
 }, {});
 console.log('Conteo por nivel:', conteo);
 // { INFO: 2, ERROR: 1, WARN: 1 }
+```
+
+**Python:**
+
+```python
+import re
+
+logs = """[2024-01-15 10:30:45] INFO: Usuario admin conectado
+[2024-01-15 10:31:02] ERROR: Fallo en conexión a BD
+[2024-01-15 10:31:15] WARN: Memoria al 85%
+[2024-01-15 10:32:00] INFO: Backup completado"""
+
+# Parser completo de logs
+# ¿Por qué? Los logs tienen estructura predecible
+# ¿Para qué? Analizar eventos del sistema
+log_pattern = re.compile(
+    r'\[(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2})\] (\w+): (.+)'
+)
+
+# Extraer todos los logs
+logs_parseados = []
+for m in log_pattern.finditer(logs):
+    logs_parseados.append({
+        'fecha': m.group(1),
+        'hora': m.group(2),
+        'nivel': m.group(3),
+        'mensaje': m.group(4),
+    })
+
+print(logs_parseados)
+# [
+#   {'fecha': '2024-01-15', 'hora': '10:30:45', 'nivel': 'INFO', 'mensaje': 'Usuario admin conectado'},
+#   {'fecha': '2024-01-15', 'hora': '10:31:02', 'nivel': 'ERROR', 'mensaje': 'Fallo en conexión a BD'},
+#   {'fecha': '2024-01-15', 'hora': '10:31:15', 'nivel': 'WARN', 'mensaje': 'Memoria al 85%'},
+#   {'fecha': '2024-01-15', 'hora': '10:32:00', 'nivel': 'INFO', 'mensaje': 'Backup completado'}
+# ]
+
+# Filtrar solo errores
+errores = [log for log in logs_parseados if log['nivel'] == 'ERROR']
+print('Errores encontrados:', len(errores))
+
+# Contar por nivel
+from collections import Counter
+conteo = Counter(log['nivel'] for log in logs_parseados)
+print('Conteo por nivel:', dict(conteo))
+# {'INFO': 2, 'ERROR': 1, 'WARN': 1}
 ```
 
 ---

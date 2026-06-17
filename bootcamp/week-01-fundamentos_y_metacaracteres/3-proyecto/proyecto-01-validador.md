@@ -1,5 +1,7 @@
 # Proyecto Semana 01: Validador de Formato Básico
 
+> **Lenguaje:** Elige JavaScript o Python para tu implementación. Ambos lenguajes cubren los mismos conceptos de RegExp con pequeñas diferencias en los métodos utilizados.
+
 ## 🎯 Objetivo
 
 Crear un validador simple que use los conceptos aprendidos:
@@ -39,6 +41,7 @@ XX-000
 
 ### Paso 1: Crear el Patrón Base
 
+**JavaScript:**
 ```javascript
 /**
  * Validador de código de producto
@@ -51,8 +54,23 @@ XX-000
 const codigoPattern = /???/;
 ```
 
+**Python:**
+```python
+"""
+Validador de código de producto
+
+¿Por qué? Los códigos de producto deben seguir un formato estándar
+¿Para qué? Validar input antes de buscar en base de datos
+"""
+import re
+
+# Tu patrón aquí:
+CODIGO_PATTERN = re.compile(r'???')
+```
+
 ### Paso 2: Crear la Función Validadora
 
+**JavaScript:**
 ```javascript
 /**
  * Valida si un código de producto tiene el formato correcto
@@ -66,6 +84,24 @@ const codigoPattern = /???/;
 function validarCodigo(codigo) {
   // Tu implementación aquí
 }
+```
+
+**Python:**
+```python
+def validar_codigo(codigo):
+    """
+    Valida si un código de producto tiene el formato correcto
+
+    ¿Por qué? Centralizar la lógica de validación
+    ¿Para qué? Reutilizar en formularios, APIs, imports de datos
+
+    Args:
+        codigo (str): El código a validar
+
+    Returns:
+        dict: Resultado de la validación
+    """
+    # Tu implementación aquí
 ```
 
 ### Paso 3: Casos de Prueba
@@ -160,9 +196,10 @@ Crea un HTML simple con un input y muestra el resultado de la validación en tie
 
 ```
 3-proyecto/
-├── proyecto-01-validador.md   (este archivo)
-├── validador.js               (tu solución)
-└── index.html                 (opcional - UI)
+├── proyecto-01-validador.md       (este archivo)
+├── validador.js                   (tu solución JavaScript)
+├── validador.py                   (tu solución Python)
+└── index.html                     (opcional - UI)
 ```
 
 ## ✅ Criterios de Evaluación
@@ -184,4 +221,5 @@ Después de completar el proyecto, responde:
 
 ---
 
-**Solución:** Disponible en `solucion-proyecto-01.js`
+**Solución JavaScript:** Disponible en `solucion-proyecto-01.js`
+**Solución Python:** Disponible en `solucion-proyecto-01.py`

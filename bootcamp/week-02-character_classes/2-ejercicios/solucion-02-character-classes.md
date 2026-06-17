@@ -37,6 +37,30 @@ const pattern3 = /c[^aeiouAEIOU]sa/g;
 // Matches: c1sa, c@sa, c-sa
 ```
 
+**Python:**
+
+```python
+import re
+
+# Tarea 1: Vocales minúsculas entre 'c' y 'sa'
+# ¿Por qué? Solo queremos las variantes con vocales minúsculas
+# ¿Para qué? Filtrar resultados específicos
+pattern1 = re.compile(r'c[aeiou]sa')
+# pattern1.findall(texto) → casa, cosa, cesa, cisa, cusa
+
+# Tarea 2: Vocales mayúsculas O minúsculas
+# ¿Por qué? Queremos ser case-insensitive para las vocales
+# ¿Para qué? Capturar todas las variantes
+pattern2 = re.compile(r'c[aeiouAEIOU]sa')
+# pattern2.findall(texto) → casa, cosa, cesa, cisa, cusa, cAsa, cOsa, cEsa
+
+# Tarea 3: Cualquier cosa EXCEPTO vocales
+# ¿Por qué? La negación [^...] excluye los caracteres listados
+# ¿Para qué? Encontrar las variantes "raras"
+pattern3 = re.compile(r'c[^aeiouAEIOU]sa')
+# pattern3.findall(texto) → c1sa, c@sa, c-sa
+```
+
 ---
 
 ## Ejercicio 02: Rangos
@@ -82,6 +106,36 @@ const pattern4 = /[a-z]\d/g;
 // Matches: a1, b2, c3, z9, m5
 ```
 
+**Python:**
+
+```python
+import re
+
+# Tarea 1: Letra mayúscula + dígito
+# ¿Por qué? Combinamos dos character classes consecutivas
+# ¿Para qué? Encontrar códigos tipo "A1", "B2"
+pattern1 = re.compile(r'[A-Z]\d')
+# pattern1.findall(texto) → A1, B2, C3, Z9, M5
+
+# Tarea 2: Dígito + letra mayúscula
+# ¿Por qué? El orden importa en regex
+# ¿Para qué? Encontrar formatos invertidos
+pattern2 = re.compile(r'\d[A-Z]')
+# pattern2.findall(texto) → 1A, 2B, 3C
+
+# Tarea 3: NO letra ni dígito
+# ¿Por qué? Buscamos caracteres especiales
+# ¿Para qué? Detectar símbolos
+pattern3 = re.compile(r'[^a-zA-Z0-9]')
+# pattern3.findall(texto) → @, #, $, %, ^, &, espacios
+
+# Tarea 4: Minúscula + dígito
+# ¿Por qué? Similar a tarea 1 pero con minúsculas
+# ¿Para qué? Patrones case-sensitive
+pattern4 = re.compile(r'[a-z]\d')
+# pattern4.findall(texto) → a1, b2, c3, z9, m5
+```
+
 ---
 
 ## Ejercicio 03: Shorthand Classes
@@ -124,6 +178,36 @@ const pattern3 = /^\d+$/;
  */
 const pattern4 = /\W/;
 // Matches en: user-name, user name, user@name, "   espacios   "
+```
+
+**Python:**
+
+```python
+import re
+
+# Tarea 1: Solo word characters (de inicio a fin)
+# ¿Por qué? \w+ captura uno o más word characters
+# ¿Para qué? Validar usernames simples
+pattern1 = re.compile(r'^\w+$')
+# bool(pattern1.search(linea)) → True para usuario123, user_name, 12345
+
+# Tarea 2: Contiene whitespace
+# ¿Por qué? \s detecta cualquier espacio en blanco
+# ¿Para qué? Identificar strings con espacios
+pattern2 = re.compile(r'\s')
+# bool(pattern2.search(linea)) → True en "user name", "   espacios   "
+
+# Tarea 3: Solo dígitos
+# ¿Por qué? \d+ solo dígitos de inicio a fin
+# ¿Para qué? Validar números enteros
+pattern3 = re.compile(r'^\d+$')
+# bool(pattern3.search(linea)) → True para 12345
+
+# Tarea 4: Contiene caracteres NO word
+# ¿Por qué? \W es la negación de \w
+# ¿Para qué? Detectar caracteres especiales
+pattern4 = re.compile(r'\W')
+# bool(pattern4.search(linea)) → True en user-name, user name, user@name
 ```
 
 ---
@@ -177,6 +261,36 @@ const pattern4 = /\bcat/gi;
 // También matchea "cat" en "Concatenate" porque hay \b antes de C
 // Mejor versión si queremos palabras que inicien:
 const pattern4b = /\bcat\w*/gi;
+```
+
+**Python:**
+
+```python
+import re
+
+# Tarea 1: "cat" como palabra completa
+# ¿Por qué? \b marca los límites de palabra
+# ¿Para qué? Evitar matches dentro de otras palabras
+pattern1 = re.compile(r'\bcat\b', re.IGNORECASE)
+# pattern1.findall(texto) → cat, Cat
+
+# Tarea 2: "the" como palabra completa
+# ¿Por qué? Misma lógica, aplicada a "the"
+# ¿Para qué? Contar artículos, no "there", "theater"
+pattern2 = re.compile(r'\bthe\b', re.IGNORECASE)
+# pattern2.findall(texto) → The, the, the, the
+
+# Tarea 3: "cat" DENTRO de otra palabra
+# ¿Por qué? \B es el opuesto de \b (non-boundary)
+# ¿Para qué? Encontrar substrings embebidos
+pattern3b = re.compile(r'\Bcat|cat\B', re.IGNORECASE)
+# pattern3b.findall(texto) → cat (en Concatenate, category, caterpillar, categories)
+
+# Tarea 4: Palabras que EMPIEZAN con "cat"
+# ¿Por qué? \b al inicio, sin \b al final
+# ¿Para qué? Buscar palabras por prefijo
+pattern4b = re.compile(r'\bcat\w*', re.IGNORECASE)
+# pattern4b.findall(texto) → cat, Cat, category, caterpillar, categories
 ```
 
 ---
@@ -243,6 +357,54 @@ nombre.test('JUAN'); // false (resto en mayúscula)
 nombre.test('J'); // false (sin minúsculas después)
 ```
 
+**Python:**
+
+```python
+import re
+
+# 1. Código postal español (5 dígitos)
+# ¿Por qué? Exactamente 5 dígitos, nada más
+# ¿Para qué? Validar direcciones españolas
+codigo_postal = re.compile(r'^\d\d\d\d\d$')
+
+bool(codigo_postal.search('28001'))  # True
+bool(codigo_postal.search('08080'))  # True
+bool(codigo_postal.search('2800'))   # False
+bool(codigo_postal.search('2800A'))  # False
+
+# 2. Inicial + número de 2 dígitos (A-99)
+# ¿Por qué? Una mayúscula, guión, dos dígitos
+# ¿Para qué? Códigos de sección/categoría
+inicial_numero = re.compile(r'^[A-Z]-\d\d$')
+
+bool(inicial_numero.search('A-01'))  # True
+bool(inicial_numero.search('Z-99'))  # True
+bool(inicial_numero.search('AB-01')) # False
+bool(inicial_numero.search('a-01'))  # False
+
+# 3. Código hexadecimal de 3 caracteres
+# ¿Por qué? Colores cortos como #F00 (sin el #)
+# ¿Para qué? Validar valores hex
+hex3 = re.compile(r'^[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]$')
+
+bool(hex3.search('F00'))  # True
+bool(hex3.search('ABC'))  # True
+bool(hex3.search('1a2'))  # True
+bool(hex3.search('GGG'))  # False
+bool(hex3.search('XYZ'))  # False
+
+# 4. Nombre simple (mayúscula inicial + minúsculas)
+# ¿Por qué? Formato típico de nombre propio
+# ¿Para qué? Normalizar y validar nombres
+nombre = re.compile(r'^[A-Z][a-z]+$')
+
+bool(nombre.search('Juan'))  # True
+bool(nombre.search('Ana'))   # True
+bool(nombre.search('juan'))  # False (no empieza mayúscula)
+bool(nombre.search('JUAN'))  # False (resto en mayúscula)
+bool(nombre.search('J'))     # False (sin minúsculas después)
+```
+
 ---
 
 ## Ejercicio 06: Caracteres Especiales en Classes
@@ -297,6 +459,42 @@ const circunflejo = /[\^]/; // Escapado
  */
 const backslash = /[\\]/;
 // Match: "C:\Users"
+```
+
+**Python:**
+
+```python
+import re
+
+# 1. Encontrar $
+# ¿Por qué? $ no es especial dentro de []
+# ¿Para qué? Buscar símbolos de moneda
+dolar = re.compile(r'[$]')
+# dolar.findall(texto) → ['$']
+
+# 2. Encontrar guión -
+# ¿Por qué? El guión es especial (define rangos)
+# ¿Para qué? Buscar guiones literales
+guion = re.compile(r'[-]')  # Al inicio
+# guion.findall(texto) → ['-']
+
+# 3. Encontrar [ o ]
+# ¿Por qué? ] cierra la clase, necesita escape
+# ¿Para qué? Buscar sintaxis de arrays
+corchetes = re.compile(r'[\[\]]')
+# corchetes.findall(texto) → ['[', ']']
+
+# 4. Encontrar ^
+# ¿Por qué? ^ al inicio de [] significa negación
+# ¿Para qué? Buscar el símbolo literal
+circunflejo = re.compile(r'[\^]')  # Escapado
+# circunflejo.findall(texto) → ['^']
+
+# 5. Encontrar \
+# ¿Por qué? \ siempre necesita escape
+# ¿Para qué? Buscar paths de Windows
+backslash = re.compile(r'[\\]')
+# backslash.findall(texto) → ['\\']
 ```
 
 ---
@@ -359,6 +557,45 @@ console.log(validarTelefono('612345678')); // true
 console.log(validarTelefono('612 345 678')); // true
 console.log(validarTelefono('91 234 56 78')); // true
 console.log(validarTelefono('12345678')); // false
+```
+
+**Python:**
+
+```python
+import re
+
+# Teléfono móvil español (9 dígitos, empieza con 6, 7, 8, 9)
+# Sin espacios
+# ¿Por qué? Los móviles españoles empiezan con 6 o 7
+# ¿Para qué? Validar números de contacto
+movil_sin_espacios = re.compile(r'^[6789]\d\d\d\d\d\d\d\d$')
+
+bool(movil_sin_espacios.search('612345678'))  # True
+bool(movil_sin_espacios.search('912345678'))  # True
+bool(movil_sin_espacios.search('12345678'))   # False
+
+# Móvil con espacios (formato: 6XX XXX XXX)
+movil_con_espacios = re.compile(r'^[67]\d\d \d\d\d \d\d\d$')
+
+bool(movil_con_espacios.search('612 345 678'))  # True
+bool(movil_con_espacios.search('612345678'))    # False
+
+# Fijo con espacios (formato: 9X XXX XX XX)
+fijo_con_espacios = re.compile(r'^9\d \d\d\d \d\d \d\d$')
+
+bool(fijo_con_espacios.search('91 234 56 78'))  # True
+
+# Validador combinado (sin cuantificadores avanzados)
+def validar_telefono(tel):
+    sin_espacios = re.compile(r'^[6789]\d\d\d\d\d\d\d\d$')
+    movil_esp = re.compile(r'^[67]\d\d \d\d\d \d\d\d$')
+    fijo_esp = re.compile(r'^9\d \d\d\d \d\d \d\d$')
+    return bool(sin_espacios.search(tel) or movil_esp.search(tel) or fijo_esp.search(tel))
+
+print(validar_telefono('612345678'))   # True
+print(validar_telefono('612 345 678')) # True
+print(validar_telefono('91 234 56 78'))# True
+print(validar_telefono('12345678'))    # False
 ```
 
 ### Nota

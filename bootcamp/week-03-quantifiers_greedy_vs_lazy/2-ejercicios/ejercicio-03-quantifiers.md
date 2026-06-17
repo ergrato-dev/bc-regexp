@@ -2,7 +2,7 @@
 
 ## Instrucciones Generales
 
-- Usa [regex101.com](https://regex101.com) para probar (flavor: JavaScript)
+- Usa [regex101.com](https://regex101.com) para probar (selecciona 'JavaScript' o 'Python' como flavor según tu lenguaje)
 - Practica tanto quantifiers greedy como lazy
 - Presta atención a la diferencia entre `*`, `+`, `?` y `{n,m}`
 

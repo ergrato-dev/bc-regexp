@@ -12,7 +12,7 @@ Al finalizar esta semana serás capaz de:
 - Aplicar non-capturing groups `(?:)` para agrupar sin capturar
 - Implementar named groups `(?<nombre>)` para código legible
 - Usar backreferences `\1` y `$1` para referenciar grupos
-- Combinar grupos con métodos de JavaScript
+- Combinar grupos con métodos de JavaScript y Python (módulo `re`)
 
 ## 📚 Contenido
 
@@ -35,7 +35,8 @@ Al finalizar esta semana serás capaz de:
 | Archivo                                                       | Descripción                  |
 | ------------------------------------------------------------- | ---------------------------- |
 | [proyecto-04-parser.md](3-proyecto/proyecto-04-parser.md)     | Parser de logs multi-formato |
-| [solucion-proyecto-04.js](3-proyecto/solucion-proyecto-04.js) | Solución del proyecto        |
+| [solucion-proyecto-04.js](3-proyecto/solucion-proyecto-04.js) | Solución del proyecto (JavaScript) |
+| [solucion-proyecto-04.py](3-proyecto/solucion-proyecto-04.py) | Solución del proyecto (Python)     |
 
 ### Recursos y Glosario
 
@@ -71,7 +72,7 @@ Al finalizar esta semana serás capaz de:
 - [ ] Leer teoría de backreferences
 - [ ] Completar ejercicios 1-7
 - [ ] Completar desafío parser de URL
-- [ ] Completar el proyecto parser de logs
+- [ ] Completar el proyecto parser de logs (JavaScript o Python)
 - [ ] Revisar el glosario
 
 ## 🔗 Recursos Rápidos
@@ -79,6 +80,7 @@ Al finalizar esta semana serás capaz de:
 - 🧪 [regex101.com](https://regex101.com) - Visualiza grupos en tiempo real
 - 📖 [MDN Groups](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Backreferences)
 - 📖 [JavaScript.info Groups](https://javascript.info/regexp-groups)
+- 🐍 [Métodos Python (Semana 01)](../week-01-fundamentos_y_metacaracteres/1-teoria/03-metodos-python.md) - Repaso del módulo `re`
 
 ## 💡 Tips de la Semana
 

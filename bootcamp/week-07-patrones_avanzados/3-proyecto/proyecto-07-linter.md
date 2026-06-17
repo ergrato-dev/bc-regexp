@@ -1,8 +1,13 @@
 # Proyecto Semana 07: Linter de Código Simple
 
+> **Lenguaje:** Elige **JavaScript** o **Python** para tu implementación.
+> - **JavaScript:** El linter analiza código JavaScript (detecta `console.log`, `==` vs `===`, `eval()`, etc.)
+> - **Python:** El linter analiza código Python (detecta `print()` en producción, `is` vs `==`, `eval()`/`exec()`, etc.)
+> - Las regex y la estructura del linter son las mismas; solo cambian las reglas según el lenguaje objetivo.
+
 ## 🎯 Objetivo
 
-Crear un **linter de código** que use expresiones regulares avanzadas para detectar problemas comunes en código JavaScript.
+Crear un **linter de código** que use expresiones regulares avanzadas para detectar problemas comunes en código.
 
 ## 📋 Descripción
 
@@ -17,6 +22,7 @@ Construirás una herramienta que analice código JavaScript y detecte:
 
 ### Paso 1: Estructura del Linter
 
+**JavaScript:**
 ```javascript
 /**
  * Regla del linter
@@ -42,64 +48,129 @@ const LintResult = {
 };
 ```
 
-### Paso 2: Reglas a Implementar
+**Python:**
+```python
+import re
 
-#### Regla 1: Variables no usadas (simplificado)
+# Regla del linter
+class Rule:
+    def __init__(self, id, description, severity, pattern, fix=None):
+        self.id = id
+        self.description = description
+        self.severity = severity  # "error" | "warning" | "info"
+        self.pattern = pattern    # re.compile(...)
+        self.fix = fix            # Función de corrección (opcional)
 
-```javascript
-// Detectar: var, let, const sin uso posterior
-// Patrón: declaración al inicio de línea sin uso
+# Resultado de análisis
+class LintResult:
+    def __init__(self, rule_id, message, severity, line, column, source):
+        self.ruleId = rule_id
+        self.message = message
+        self.severity = severity
+        self.line = line
+        self.column = column
+        self.source = source
 ```
 
-#### Regla 2: console.log en producción
+### Paso 2: Reglas a Implementar
 
+> **JavaScript:** Reglas para JS | **Python:** Reglas para Python (adaptadas al lenguaje)
+
+#### Regla 1: console.log / print en producción
+
+**JavaScript:**
 ```javascript
 // Detectar: console.log, console.warn, console.error
 // Excepto: en comentarios
 ```
 
-#### Regla 3: == en lugar de ===
+**Python:**
+```python
+# Detectar: print() en código de producción
+# Excepto: en comentarios o docstrings
+```
 
+#### Regla 2: == en lugar de === (JS) / is vs == (Python)
+
+**JavaScript:**
 ```javascript
 // Detectar: == o != (no estrictos)
 // Excepto: comparación con null
 ```
 
-#### Regla 4: Números mágicos
+**Python:**
+```python
+# Detectar: == None en lugar de is None, == True/False
+# Sugerir: usar is None, is True, is False
+```
 
+#### Regla 3: Números mágicos
+
+**JavaScript:**
 ```javascript
 // Detectar: números literales excepto 0, 1, -1
 // En: operaciones aritméticas
 ```
 
-#### Regla 5: TODO/FIXME sin resolver
+**Python:**
+```python
+# Detectar: números literales excepto 0, 1, -1
+# En: operaciones aritméticas y comparaciones
+```
 
+#### Regla 4: TODO/FIXME sin resolver
+
+**JavaScript:**
 ```javascript
 // Detectar: TODO, FIXME, HACK, XXX en comentarios
 ```
 
-#### Regla 6: Funciones muy largas
+**Python:**
+```python
+# Detectar: TODO, FIXME, HACK, XXX en comentarios
+```
+
+#### Regla 5: Funciones muy largas
 
 ```javascript
 // Detectar: funciones con más de N líneas
 // Default: 50 líneas
 ```
 
-#### Regla 7: Líneas muy largas
+**Python:**
+```python
+# Detectar: funciones (def) con más de N líneas
+# Default: 50 líneas
+```
+
+#### Regla 6: Líneas muy largas
 
 ```javascript
 // Detectar: líneas con más de N caracteres
 // Default: 120 caracteres
 ```
 
-#### Regla 8: eval() y Function()
+**Python:**
+```python
+# Detectar: líneas con más de N caracteres
+# Default: 120 caracteres (PEP 8 recomienda 79)
+```
 
+#### Regla 7: eval() y código dinámico peligroso
+
+**JavaScript:**
 ```javascript
 // Detectar: uso de eval, new Function, setTimeout(string)
 ```
 
+**Python:**
+```python
+# Detectar: uso de eval(), exec(), compile(), __import__()
+```
+
 ### Paso 3: Motor del Linter
 
+**JavaScript:**
 ```javascript
 /**
  * Linter principal
@@ -118,8 +189,25 @@ function lint(code, options = {}) {
 }
 ```
 
+**Python:**
+```python
+def lint(code, options=None):
+    """Linter principal.
+    Args:
+        code: Código Python a analizar.
+        options: Diccionario de configuración.
+    Returns:
+        Lista de LintResult con los problemas encontrados.
+    """
+    results = []
+    lines = code.split('\n')
+    # Tu implementación
+    return results
+```
+
 ### Paso 4: Reporte de Resultados
 
+**JavaScript:**
 ```javascript
 /**
  * Formatear resultados para consola
@@ -130,6 +218,18 @@ function formatResults(results, filename) {
   //   10:5  error  Unexpected console.log  no-console
   //   15:8  warn   Magic number: 42        no-magic-numbers
 }
+```
+
+**Python:**
+```python
+def format_results(results, filename):
+    """Formatear resultados para consola.
+    Formato:
+        filename.py
+          10:5  error  Unexpected print() call  no-print
+          15:8  warn   Magic number: 42         no-magic-numbers
+    """
+    pass
 ```
 
 ## 💡 Hints
@@ -175,14 +275,17 @@ function getPosition(code, index) {
 ```
 3-proyecto/
 ├── proyecto-07-linter.md      (este archivo)
-├── linter.js                   (tu solución)
+├── linter.js                   (solución JavaScript)
+├── linter.py                   (solución Python)
 ├── rules/                      (reglas individuales)
 │   ├── no-console.js
-│   ├── eqeqeq.js
+│   ├── no-print.py
 │   └── ...
 ├── test-files/                 (archivos para probar)
 │   ├── bad-code.js
-│   └── good-code.js
+│   ├── bad_code.py
+│   ├── good-code.js
+│   └── good_code.py
 └── demo.js                     (demo de uso)
 ```
 
@@ -233,4 +336,5 @@ console.log('Esto está permitido');
 
 ---
 
-**Solución:** Disponible en `solucion-proyecto-07.js`
+**Solución JavaScript:** Disponible en `solucion-proyecto-07.js`
+**Solución Python:** Disponible en `solucion-proyecto-07.py`

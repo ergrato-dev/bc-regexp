@@ -29,6 +29,28 @@ for (const match of texto.matchAll(emailPattern)) {
 // Usuario: soporte, Dominio: mi-tienda.com
 ```
 
+**Python:**
+
+```python
+import re
+
+# Patrón: Email con usuario y dominio
+# ¿Por qué? Los emails tienen estructura usuario@dominio
+# ¿Para qué? Extraer ambas partes para procesamiento
+email_pattern = re.compile(r'([\w.-]+)@([\w.-]+)')
+
+texto = """Lista de contactos:
+ana@gmail.com
+carlos.perez@empresa.es
+soporte@mi-tienda.com"""
+
+for match in email_pattern.finditer(texto):
+    print(f'Usuario: {match.group(1)}, Dominio: {match.group(2)}')
+# Usuario: ana, Dominio: gmail.com
+# Usuario: carlos.perez, Dominio: empresa.es
+# Usuario: soporte, Dominio: mi-tienda.com
+```
+
 ---
 
 ## Ejercicio 2: Parser de Fecha
@@ -63,6 +85,29 @@ for (const match of texto.matchAll(fechaPattern)) {
 // { dia: '01', mes: '06', anio: '2025' }
 ```
 
+**Python:**
+
+```python
+import re
+
+# Patrón: Fecha con separador consistente
+# ¿Por qué? El separador debe ser el mismo en toda la fecha
+# ¿Para qué? Validar y extraer componentes de fecha
+fecha_pattern = re.compile(r'(?P<dia>\d{2})([\/.-])(?P<mes>\d{2})\2(?P<anio>\d{4})')
+
+texto = """Fechas importantes:
+15/01/2024
+28-12-2023
+01.06.2025
+15/06-2024"""  # Esta no coincide por separadores mixtos
+
+for match in fecha_pattern.finditer(texto):
+    print(match.groupdict())
+# {'dia': '15', 'mes': '01', 'anio': '2024'}
+# {'dia': '28', 'mes': '12', 'anio': '2023'}
+# {'dia': '01', 'mes': '06', 'anio': '2025'}
+```
+
 ---
 
 ## Ejercicio 3: Encontrar Palabras Duplicadas
@@ -92,6 +137,31 @@ console.log(texto.match(duplicadaPattern));
 const corregido = texto.replace(duplicadaPattern, '$1');
 console.log(corregido);
 // "El gato saltó sobre la cerca y corrió muy rápido."
+```
+
+**Python:**
+
+```python
+import re
+
+# Patrón: Palabra seguida de sí misma
+# ¿Por qué? Los errores tipográficos incluyen repeticiones
+# ¿Para qué? Detectar y corregir duplicados
+duplicada_pattern = re.compile(r'\b(\w+)\s+\1\b', re.IGNORECASE)
+
+texto = 'El el gato saltó sobre la la cerca y y corrió muy muy rápido.'
+
+print(duplicada_pattern.findall(texto))
+# ['El', 'la', 'y', 'muy']  # findall con grupos devuelve el grupo
+
+# Para obtener el match completo:
+print([m.group(0) for m in duplicada_pattern.finditer(texto)])
+# ['El el', 'la la', 'y y', 'muy muy']
+
+# Para corregir:
+corregido = duplicada_pattern.sub(r'\1', texto)
+print(corregido)
+# "El gato saltó sobre la cerca y corrió muy rápido."
 ```
 
 ---
@@ -134,6 +204,38 @@ console.log(resultados);
 // ]
 ```
 
+**Python:**
+
+```python
+import re
+
+# Patrón: Etiqueta HTML con apertura y cierre correcto
+# ¿Por qué? La etiqueta de cierre debe coincidir con la de apertura
+# ¿Para qué? Validar estructura HTML
+# Nota: Python usa (?P<name>...) para named groups y (?P=name) para backreference
+html_pattern = re.compile(r'<(?P<tag>\w+)>(?P<contenido>.*?)</(?P=tag)>', re.DOTALL)
+
+texto = """<div>contenido</div>
+<span>texto</span>
+<p>párrafo</div>
+<h1>título</h1>
+<a>enlace</b>"""
+
+resultados = []
+for match in html_pattern.finditer(texto):
+    resultados.append({
+        'tag': match.group('tag'),
+        'contenido': match.group('contenido'),
+    })
+
+print(resultados)
+# [
+#   {'tag': 'div', 'contenido': 'contenido'},
+#   {'tag': 'span', 'contenido': 'texto'},
+#   {'tag': 'h1', 'contenido': 'título'}
+# ]
+```
+
 ---
 
 ## Ejercicio 5: Reformatear Nombres
@@ -166,6 +268,32 @@ console.log(resultado);
 const nombrePatternNamed = /(?<apellido>.+?),\s*(?<nombre>.+)/gm;
 const resultado2 = texto.replace(nombrePatternNamed, '$<nombre> $<apellido>');
 console.log(resultado2);
+```
+
+**Python:**
+
+```python
+import re
+
+# Patrón: "Apellido, Nombre" → "Nombre Apellido"
+# ¿Por qué? El formato de entrada es diferente al deseado
+# ¿Para qué? Normalizar formato de nombres
+nombre_pattern = re.compile(r'(.+?),\s*(.+)')
+
+texto = """García, Juan
+López, María Elena
+Martínez de la Cruz, Carlos"""
+
+resultado = nombre_pattern.sub(r'\2 \1', texto)
+print(resultado)
+# Juan García
+# María Elena López
+# Carlos Martínez de la Cruz
+
+# Con named groups (más legible):
+nombre_pattern_named = re.compile(r'(?P<apellido>.+?),\s*(?P<nombre>.+)')
+resultado2 = nombre_pattern_named.sub(r'\g<nombre> \g<apellido>', texto)
+print(resultado2)
 ```
 
 ---
@@ -201,6 +329,31 @@ for (const match of texto.matchAll(telefonoPattern)) {
 // { codigo: '+44', numero: '2079460958' }
 ```
 
+**Python:**
+
+```python
+import re
+
+# Patrón: Teléfono internacional
+# ¿Por qué? Los formatos internacionales varían
+# ¿Para qué? Extraer código y número normalizado
+telefono_pattern = re.compile(r'(?P<codigo>\+\d{1,3})[\s(]*(?P<numero>[\d\s()-]+)')
+
+texto = """+34 612 345 678
++1 (555) 123-4567
++44 20 7946 0958"""
+
+for match in telefono_pattern.finditer(texto):
+    codigo = match.group('codigo')
+    numero = match.group('numero')
+    # Limpiar el número (quitar espacios, paréntesis, guiones)
+    numero_limpio = re.sub(r'[\s()-]', '', numero).strip()
+    print({'codigo': codigo, 'numero': numero_limpio})
+# {'codigo': '+34', 'numero': '612345678'}
+# {'codigo': '+1', 'numero': '5551234567'}
+# {'codigo': '+44', 'numero': '2079460958'}
+```
+
 ---
 
 ## Ejercicio 7: Non-Capturing Groups
@@ -230,6 +383,25 @@ for (const match of texto.matchAll(dominioPattern)) {
 
 console.log(dominios);
 // ["google.com", "example.org", "api.github.com"]
+```
+
+**Python:**
+
+```python
+import re
+
+# Patrón: Extraer solo dominio de URL
+# ¿Por qué? No necesitamos capturar protocolo ni www
+# ¿Para qué? Simplificar la salida
+dominio_pattern = re.compile(r'(?:https?|ftp):\/\/(?:www\.)?([\w.-]+)')
+
+texto = """https://www.google.com
+http://example.org
+https://api.github.com"""
+
+dominios = dominio_pattern.findall(texto)
+print(dominios)
+# ["google.com", "example.org", "api.github.com"]
 ```
 
 ---
@@ -318,6 +490,54 @@ function parseURL(url) {
 
 console.log(parseURL('https://www.google.com'));
 // { protocolo: 'https', subdominio: 'www', dominio: 'google', tld: 'com' }
+```
+
+**Python:**
+
+```python
+import re
+
+# Patrón: URL completa con todas sus partes
+# ¿Por qué? Las URLs tienen múltiples componentes opcionales
+# ¿Para qué? Parser completo para análisis de URLs
+# Nota: Python usa (?P<name>...) para named groups
+url_pattern = re.compile(
+    r'^(?P<protocolo>https?|ftp):\/\/'
+    r'(?:(?P<subdominio>[\w-]+)\.)?'
+    r'(?P<dominio>[\w-]+)'
+    r'\.(?P<tld>\w+)'
+    r'(?::(?P<puerto>\d+))?'
+    r'(?P<path>\/[^?#]*)?'
+    r'(?:\?(?P<query>[^#]*))?'
+    r'(?:#(?P<fragment>.*))?$'
+)
+
+urls = [
+    'https://www.ejemplo.com:8080/ruta/pagina.html?id=123&lang=es#seccion',
+    'http://api.servicio.io/v1/users',
+    'ftp://files.servidor.net/descargas/archivo.zip',
+]
+
+for url in urls:
+    match = url_pattern.match(url)
+    if match:
+        print(f'\n{url}')
+        print(match.groupdict())
+
+# https://www.ejemplo.com:8080/ruta/pagina.html?id=123&lang=es#seccion
+# {'protocolo': 'https', 'subdominio': 'www', 'dominio': 'ejemplo', 'tld': 'com',
+#  'puerto': '8080', 'path': '/ruta/pagina.html', 'query': 'id=123&lang=es', 'fragment': 'seccion'}
+
+def parse_url(url):
+    """Función utilitaria para parsear URLs"""
+    match = url_pattern.match(url)
+    if not match:
+        return None
+    # Eliminar None values
+    return {k: v for k, v in match.groupdict().items() if v is not None}
+
+print(parse_url('https://www.google.com'))
+# {'protocolo': 'https', 'subdominio': 'www', 'dominio': 'google', 'tld': 'com'}
 ```
 
 ---

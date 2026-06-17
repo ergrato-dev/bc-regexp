@@ -35,6 +35,30 @@ for (const match of logs.matchAll(logPattern)) {
 // ...
 ```
 
+**Python:**
+
+```python
+import re
+
+log_pattern = re.compile(
+    r'^\[(?P<date>\d{4}-\d{2}-\d{2})\s+'
+    r'(?P<time>\d{2}:\d{2}:\d{2})\]\s+'
+    r'(?P<level>ERROR|WARN|INFO|DEBUG)\s+'
+    r'(?P<service>[\w-]+):\s+(?P<message>.+)$',
+    re.MULTILINE
+)
+
+logs = """[2024-03-15 10:30:45] ERROR servidor-web: Connection timeout
+[2024-03-15 10:31:02] INFO auth-service: User login successful
+[2024-03-15 10:31:15] WARN database: High memory usage (85%)
+[2024-03-15 10:32:00] DEBUG api-gateway: Request processed in 45ms"""
+
+for match in log_pattern.finditer(logs):
+    print(match.groupdict())
+# {'date': '2024-03-15', 'time': '10:30:45', 'level': 'ERROR', 'service': 'servidor-web', 'message': 'Connection timeout'}
+# ...
+```
+
 ---
 
 ## Ejercicio 2: Validador de Contraseña Segura
@@ -90,6 +114,38 @@ function validatePassword(password) {
 }
 ```
 
+**Python:**
+
+```python
+import re
+
+password_pattern = re.compile(
+    r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])(?!.*\s)(?!.*(.)\1{3,}).{8,}$'
+)
+
+# Tests
+print(bool(password_pattern.search('Passw0rd!')))    # True
+print(bool(password_pattern.search('MyStr0ng#Pass')))  # True
+print(bool(password_pattern.search('C0mpl3x!ty')))   # True
+print(bool(password_pattern.search('password')))     # False
+print(bool(password_pattern.search('PASSWORD1!')))   # False
+print(bool(password_pattern.search('Passw0rd')))     # False
+print(bool(password_pattern.search('Pass 0rd!')))    # False
+
+def validate_password(password):
+    checks = [
+        (r'.{8,}', 'Mínimo 8 caracteres'),
+        (r'[A-Z]', 'Al menos una mayúscula'),
+        (r'[a-z]', 'Al menos una minúscula'),
+        (r'\d', 'Al menos un número'),
+        (r'[!@#$%^&*]', 'Al menos un carácter especial'),
+        (r'^\S+$', 'Sin espacios'),
+        (r'^(?!.*(.)\1{3,})', 'Sin 4+ caracteres repetidos'),
+    ]
+    failed = [msg for pat, msg in checks if not re.search(pat, password)]
+    return {'valid': len(failed) == 0, 'errors': failed}
+```
+
 ---
 
 ## Ejercicio 3: Extractor de URLs con Componentes
@@ -138,6 +194,38 @@ for (const url of urls) {
 //   query: 'id=123&name=test',
 //   fragment: 'section'
 // }
+```
+
+**Python:**
+
+```python
+import re
+
+url_pattern = re.compile(
+    r'^(?P<protocol>https?|ftp)://'
+    r'(?:(?P<subdomain>[\w-]+)\.)?'
+    r'(?P<domain>[\w-]+)\.'
+    r'(?P<tld>[a-z]{2,})'
+    r'(?::(?P<port>\d+))?'
+    r'(?P<path>/[^\s?#]*)?'
+    r'(?:\?(?P<query>[^\s#]*))?'
+    r'(?:#(?P<fragment>\S*))?$',
+    re.IGNORECASE
+)
+
+urls = [
+    'https://www.example.com:8080/path/to/page?id=123&name=test#section',
+    'http://api.service.io/v2/users',
+    'ftp://files.server.net/downloads/file.zip',
+    'https://sub.domain.example.org/search?q=regex',
+]
+
+for url in urls:
+    match = url_pattern.search(url)
+    if match:
+        print(url)
+        print(match.groupdict())
+        print('---')
 ```
 
 ---
@@ -198,6 +286,39 @@ console.log(detectSQLInjection('Hello world')); // detected: false
  */
 const sqlInjectionCombined =
   /(?:--\s*$|\/\*[\s\S]*?\*\/|['"]?\s*(?:OR|AND)\s+['"]?\d+['"]?\s*=\s*['"]?\d+|UNION\s+(?:ALL\s+)?SELECT|;\s*(?:DROP|DELETE|INSERT|UPDATE|CREATE|ALTER|TRUNCATE))/i;
+```
+
+**Python:**
+
+```python
+import re
+
+sql_injection_patterns = [
+    r'--\s*$',
+    r'/\*.*\*/',
+    r"""['"]?\s*(?:OR|AND)\s+['"]?\d+['"]\s*=\s*['"]\d+""",
+    r"""['"]?\s*(?:OR|AND)\s+\d+\s*=\s*\d+""",
+    r'UNION\s+(?:ALL\s+)?SELECT',
+    r';\s*(?:DROP|DELETE|INSERT|UPDATE|CREATE|ALTER|TRUNCATE)',
+    r"""'\s*;\s*(?:DROP|DELETE)""",
+]
+
+def detect_sql_injection(inp):
+    for pat in sql_injection_patterns:
+        if re.search(pat, inp, re.IGNORECASE):
+            return {'detected': True, 'pattern': pat, 'input': inp}
+    return {'detected': False}
+
+# Tests - Ataques
+print(detect_sql_injection("' OR '1'='1"))        # detected: True
+print(detect_sql_injection("'; DROP TABLE users; --"))  # detected: True
+print(detect_sql_injection('1; DELETE FROM products'))  # detected: True
+print(detect_sql_injection('UNION SELECT * FROM users'))  # detected: True
+
+# Tests - Seguros
+print(detect_sql_injection("John's Pizza"))      # detected: False
+print(detect_sql_injection('SELECT menu items'))  # detected: False
+print(detect_sql_injection('Hello world'))        # detected: False
 ```
 
 ---
@@ -263,6 +384,42 @@ console.log(parseCSV(csvData));
 // ]
 ```
 
+**Python:**
+
+```python
+import re
+
+def parse_csv_line(line):
+    # Patrón: campo entre comillas (con "" escapado) o campo sin comillas
+    pattern = re.compile(r'(?:^|,)(?:"((?:[^"]|"")*)"|([^",\n]*))')
+    fields = []
+    for match in pattern.finditer(line):
+        quoted, unquoted = match.group(1), match.group(2)
+        if quoted is not None:
+            fields.append(quoted.replace('""', '"'))
+        else:
+            fields.append(unquoted)
+    return fields
+
+def parse_csv(csv):
+    return [parse_csv_line(line) for line in csv.strip().split('\n')]
+
+csv_data = """nombre,edad,ciudad
+"García, Juan",35,"Madrid, España"
+Ana,28,Barcelona
+"El ""Maestro"" López",45,Sevilla
+,25,Valencia
+Pedro,,Bilbao"""
+
+print(parse_csv(csv_data))
+# [['nombre', 'edad', 'ciudad'],
+#  ['García, Juan', '35', 'Madrid, España'],
+#  ['Ana', '28', 'Barcelona'],
+#  ['El "Maestro" López', '45', 'Sevilla'],
+#  ['', '25', 'Valencia'],
+#  ['Pedro', '', 'Bilbao']]
+```
+
 ---
 
 ## Ejercicio 6: Optimizar Patrón Problemático
@@ -320,6 +477,28 @@ console.log(htmlTagSeguro.test('<div>content</div>')); // true
 console.log(numeroConSeparadores.test('1,234,567')); // true
 console.log(numeroConSeparadores.test('1,,234')); // false
 console.log(numeroConSeparadores.test(',234')); // false
+```
+
+**Python:**
+
+```python
+import re
+
+# 1. Email seguro
+email_seguro = re.compile(r'^[\w.]{1,64}@[\w.]{1,255}\.[a-z]{2,}$', re.IGNORECASE)
+
+# 2. HTML tag seguro
+html_tag_seguro = re.compile(r'<(\w+)>[^<]*</\1>')
+html_tag_nested = re.compile(r'<(\w+)>(?:(?!</\1>).)*</\1>', re.DOTALL)
+
+# 3. Número con separadores
+numero_con_separadores = re.compile(r'^\d{1,3}(?:,\d{3})*$')
+
+# Tests
+print(bool(email_seguro.search('user@example.com')))  # True
+print(bool(html_tag_seguro.search('<div>content</div>')))  # True
+print(bool(numero_con_separadores.search('1,234,567')))  # True
+print(bool(numero_con_separadores.search('1,,234')))  # False
 ```
 
 ---
@@ -412,6 +591,45 @@ console.log(tokenize('sin(x) ** 2'));
 //   { type: 'POWER', value: '**' },
 //   { type: 'NUMBER', value: '2' }
 // ]
+```
+
+**Python:**
+
+```python
+import re
+
+token_defs = [
+    ('NUMBER', r'\d+(?:\.\d+)?'),
+    ('POWER', r'\*\*|\^'),
+    ('PLUS', r'\+'),
+    ('MINUS', r'-'),
+    ('MULT', r'\*'),
+    ('DIV', r'/'),
+    ('LPAREN', r'\('),
+    ('RPAREN', r'\)'),
+    ('IDENT', r'[a-zA-Z_]\w*'),
+    ('WS', r'\s+'),
+]
+
+# Construir regex combinado con named groups
+combined = re.compile(
+    '|'.join(f'(?P<{t}>{p})' for t, p in token_defs)
+)
+
+def tokenize(expression):
+    tokens = []
+    for match in combined.finditer(expression):
+        for ttype, value in match.groupdict().items():
+            if value is not None and ttype != 'WS':
+                tokens.append({'type': ttype, 'value': value})
+                break
+    return tokens
+
+# Tests
+print(tokenize('3 + 4 * 2'))
+print(tokenize('(10 - 5) / 2.5'))
+print(tokenize('x^2 + 2*x + 1'))
+print(tokenize('sin(x) ** 2'))
 ```
 
 ---
@@ -561,6 +779,42 @@ function parseTemplateNested(template) {
 
 console.log(parseTemplateNested('${a ? ${b} : c}'));
 // [{ type: 'EXPR', value: 'a ? ${b} : c' }]
+```
+
+**Python:**
+
+```python
+import re
+
+def parse_template(template):
+    result = []
+    template_pattern = re.compile(r'(?P<text>[^$]+)|\$\{(?P<expr>[^}]+)\}')
+    for match in template_pattern.finditer(template):
+        if match.group('text') is not None:
+            text = match.group('text')
+            if text:
+                result.append({'type': 'TEXT', 'value': text})
+        elif match.group('expr') is not None:
+            result.append({'type': 'EXPR', 'value': match.group('expr').strip()})
+    return result
+
+def parse_template_robust(template):
+    result = []
+    last_index = 0
+    expr_pattern = re.compile(r'\$\{([^}]+)\}')
+    for match in expr_pattern.finditer(template):
+        if match.start() > last_index:
+            result.append({'type': 'TEXT', 'value': template[last_index:match.start()]})
+        result.append({'type': 'EXPR', 'value': match.group(1).strip()})
+        last_index = match.end()
+    if last_index < len(template):
+        result.append({'type': 'TEXT', 'value': template[last_index:]})
+    return result
+
+# Tests
+print(parse_template_robust('Hello, ${name}!'))
+print(parse_template_robust('Hello, ${name}! You have ${items.length} items.'))
+print(parse_template_robust('Price: $${price} (${tax}% tax)'))
 ```
 
 ---

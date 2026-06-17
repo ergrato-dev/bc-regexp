@@ -13,6 +13,7 @@ Al finalizar esta semana serás capaz de:
 - Identificar y evitar catastrophic backtracking
 - Crear tokenizers y parsers simples
 - Aplicar técnicas de seguridad en regex
+- Implementar patrones avanzados tanto en JavaScript como en Python (`re` module)
 
 ## 📚 Contenido
 
@@ -34,7 +35,8 @@ Al finalizar esta semana serás capaz de:
 | Archivo                                                       | Descripción             |
 | ------------------------------------------------------------- | ----------------------- |
 | [proyecto-07-linter.md](3-proyecto/proyecto-07-linter.md)     | Linter de código simple |
-| [solucion-proyecto-07.js](3-proyecto/solucion-proyecto-07.js) | Solución del proyecto   |
+| [solucion-proyecto-07.js](3-proyecto/solucion-proyecto-07.js) | Solución del proyecto (JavaScript) |
+| [solucion-proyecto-07.py](3-proyecto/solucion-proyecto-07.py) | Solución del proyecto (Python)     |
 
 ### Recursos y Glosario
 
@@ -66,9 +68,9 @@ Al finalizar esta semana serás capaz de:
 ## ✅ Checklist de Progreso
 
 - [ ] Leer teoría de patrones avanzados
-- [ ] Completar ejercicios 1-7
+- [ ] Completar ejercicios 1-7 (JavaScript o Python)
 - [ ] Completar desafío template parser
-- [ ] Completar el proyecto linter
+- [ ] Completar el proyecto linter (JavaScript o Python)
 - [ ] Revisar el glosario
 
 ## 🔗 Recursos Rápidos

@@ -1,5 +1,7 @@
 # Proyecto Semana 04: Parser de Logs con Grupos
 
+**Lenguaje:** Elige JavaScript o Python para tu implementación.
+
 ## 🎯 Objetivo
 
 Crear un **parser de logs** que extraiga información estructurada de diferentes formatos de log usando grupos de captura y backreferences.
@@ -252,7 +254,8 @@ function exportarJSON(logsParsed) {
 ```
 3-proyecto/
 ├── proyecto-04-parser.md         (este archivo)
-├── log-parser.js                  (tu solución)
+├── log-parser.js                  (tu solución JavaScript)
+├── log-parser.py                  (tu solución Python)
 ├── test-parser.js                 (tests)
 └── datos/
     ├── apache.log
@@ -281,4 +284,6 @@ Después de completar el proyecto, responde:
 
 ---
 
-**Solución:** Disponible en `solucion-proyecto-04.js`
+**Solución JavaScript:** Disponible en `solucion-proyecto-04.js`
+
+**Solución Python:** Disponible en `solucion-proyecto-04.py`

@@ -12,6 +12,7 @@ Al finalizar esta semana serás capaz de:
 - Especificar repeticiones exactas con `{n}`, `{n,m}`, `{n,}`
 - Entender la diferencia entre greedy y lazy
 - Aplicar quantifiers para validaciones y extracciones reales
+- Implementar las soluciones tanto en JavaScript como en Python (con el módulo `re`)
 
 ## 📚 Contenido
 
@@ -34,7 +35,8 @@ Al finalizar esta semana serás capaz de:
 | Archivo                                                         | Descripción                 |
 | --------------------------------------------------------------- | --------------------------- |
 | [proyecto-03-extractor.md](3-proyecto/proyecto-03-extractor.md) | Extractor de datos de texto |
-| [solucion-proyecto-03.js](3-proyecto/solucion-proyecto-03.js)   | Solución del proyecto       |
+| [solucion-proyecto-03.js](3-proyecto/solucion-proyecto-03.js)   | Solución del proyecto (JavaScript) |
+| [solucion-proyecto-03.py](3-proyecto/solucion-proyecto-03.py)   | Solución del proyecto (Python)     |
 
 ### Recursos y Glosario
 
@@ -72,7 +74,7 @@ Al finalizar esta semana serás capaz de:
 - [ ] Leer teoría de greedy vs lazy
 - [ ] Completar ejercicios 1-6
 - [ ] Completar desafío parser de logs
-- [ ] Completar el proyecto extractor
+- [ ] Completar el proyecto extractor (JavaScript o Python)
 - [ ] Revisar el glosario
 
 ## 🔗 Recursos Rápidos
@@ -80,6 +82,7 @@ Al finalizar esta semana serás capaz de:
 - 🧪 [regex101.com](https://regex101.com) - Visualiza el backtracking
 - 📖 [JavaScript.info Quantifiers](https://javascript.info/regexp-quantifiers)
 - 📖 [Greedy and Lazy](https://javascript.info/regexp-greedy-and-lazy)
+- 🐍 [Métodos Python (Semana 01)](../week-01-fundamentos_y_metacaracteres/1-teoria/03-metodos-python.md) - Repaso del módulo `re`
 
 ## 💡 Tips de la Semana
 

@@ -1,5 +1,9 @@
 # Ejercicios - Semana 06: Flags y Modificadores
 
+> **Lenguaje:** Selecciona **JavaScript** o **Python** como flavor según tu lenguaje de programación. Las regex y sus flags tienen sintaxis diferente en cada lenguaje.
+> - JavaScript: `/patron/gi` — flags como `g`, `i`, `m`, `s`, `u`, `y`, `d`
+> - Python: `re.compile(r'patron', re.IGNORECASE | re.MULTILINE)` — flags como `re.IGNORECASE`, `re.MULTILINE`, `re.DOTALL`, `re.UNICODE`, etc.
+
 ## Ejercicio 1: Contador de Palabras
 
 **Objetivo:** Contar todas las ocurrencias de una palabra, sin importar mayúsculas.

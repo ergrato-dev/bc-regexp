@@ -1,5 +1,9 @@
 # Proyecto Semana 05: Validador de Formularios Avanzado
 
+> **Lenguaje:** Elige **JavaScript** o **Python** para tu implementación. La lógica de regex es idéntica; solo cambia la sintaxis del lenguaje.
+> - **JavaScript:** `/patron/flags` con `.test()`, `.match()`, `.replace()`
+> - **Python:** `re.compile(r'patron')` con `.search()`, `.findall()`, `.sub()`
+
 ## 🎯 Objetivo
 
 Crear un **sistema de validación de formularios** usando lookarounds para:
@@ -17,6 +21,7 @@ Construirás un validador completo que puede usarse en aplicaciones reales.
 
 ### Paso 1: Definir Reglas de Validación
 
+**JavaScript:**
 ```javascript
 /**
  * Reglas de validación para cada campo
@@ -46,8 +51,38 @@ const REGLAS = {
 };
 ```
 
+**Python:**
+```python
+import re
+
+REGLAS = {
+    'password': {
+        'minLength': 8,
+        'maxLength': 128,
+        'requireUppercase': True,
+        'requireLowercase': True,
+        'requireDigit': True,
+        'requireSpecial': True,
+        'noSpaces': True,
+        'noConsecutiveRepeats': True,
+    },
+    'username': {
+        'minLength': 3,
+        'maxLength': 20,
+        'allowedChars': re.compile(r'^[a-zA-Z0-9_]+$'),
+        'mustStartWithLetter': True,
+        'noConsecutiveUnderscores': True,
+    },
+    'creditCard': {
+        'validFormats': ['visa', 'mastercard', 'amex'],
+        'requireLuhn': True,
+    },
+}
+```
+
 ### Paso 2: Validador de Password
 
+**JavaScript:**
 ```javascript
 /**
  * Patrón de password con todos los requisitos
@@ -81,8 +116,25 @@ function validarPassword(password) {
 }
 ```
 
+**Python:**
+```python
+def crear_pattern_password():
+    # Tu implementación
+    pass
+
+def validar_password(password):
+    resultado = {
+        'valido': False,
+        'errores': [],
+        'fortaleza': 0,  # 0-100
+    }
+    # Tu implementación
+    return resultado
+```
+
 ### Paso 3: Validador de Username
 
+**JavaScript:**
 ```javascript
 /**
  * Validar nombre de usuario
@@ -109,8 +161,23 @@ function validarUsername(username) {
 }
 ```
 
+**Python:**
+```python
+PALABRAS_PROHIBIDAS = ['admin', 'root', 'system', 'null', 'undefined']
+
+def validar_username(username):
+    resultado = {
+        'valido': False,
+        'errores': [],
+        'sugerencias': [],
+    }
+    # Tu implementación
+    return resultado
+```
+
 ### Paso 4: Validador de Tarjeta de Crédito
 
+**JavaScript:**
 ```javascript
 /**
  * Validar número de tarjeta de crédito
@@ -140,8 +207,25 @@ function verificarLuhn(numero) {
 }
 ```
 
+**Python:**
+```python
+def validar_tarjeta(numero):
+    resultado = {
+        'valido': False,
+        'tipo': None,
+        'errores': [],
+    }
+    # Tu implementación
+    return resultado
+
+def verificar_luhn(numero):
+    # Tu implementación
+    pass
+```
+
 ### Paso 5: Extractor de Información Contextual
 
+**JavaScript:**
 ```javascript
 /**
  * Extraer información usando lookarounds
@@ -159,6 +243,17 @@ function extraerInformacion(texto) {
     hashtags: [], // Hashtags
   };
 }
+```
+
+**Python:**
+```python
+def extraer_informacion(texto):
+    return {
+        'precios': [],   # Valores numéricos de precios en €
+        'fechas': [],    # Fechas en formato DD/MM/YYYY
+        'menciones': [], # Usernames mencionados
+        'hashtags': [],  # Hashtags
+    }
 ```
 
 ## 💡 Hints
@@ -261,8 +356,10 @@ function formatearTarjeta(numero) {
 ```
 3-proyecto/
 ├── proyecto-05-validador.md      (este archivo)
-├── validador.js                   (tu solución)
-├── test-validador.js              (tests)
+├── validador.js                   (solución JavaScript)
+├── validador.py                   (solución Python)
+├── test-validador.js              (tests JavaScript)
+├── test_validador.py              (tests Python)
 └── demo.html                      (opcional: demo visual)
 ```
 
@@ -285,4 +382,5 @@ function formatearTarjeta(numero) {
 
 ---
 
-**Solución:** Disponible en `solucion-proyecto-05.js`
+**Solución JavaScript:** Disponible en `solucion-proyecto-05.js`
+**Solución Python:** Disponible en `solucion-proyecto-05.py`

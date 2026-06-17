@@ -2,7 +2,7 @@
 
 ## Instrucciones Generales
 
-- Usa [regex101.com](https://regex101.com) para probar (flavor: JavaScript)
+- Usa [regex101.com](https://regex101.com) para probar (selecciona 'JavaScript' o 'Python' como flavor según tu lenguaje)
 - Intenta resolver sin ver las soluciones
 - Usa los conceptos: `[abc]`, `[^abc]`, `[a-z]`, `\d`, `\w`, `\s`, `\b`
 

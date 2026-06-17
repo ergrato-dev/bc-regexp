@@ -2,6 +2,8 @@
 
 ## Instrucciones
 
+> **Lenguaje:** Selecciona **JavaScript** o **Python** como flavor según tu lenguaje de programación. Las soluciones se proveen en ambos lenguajes.
+
 Estos ejercicios integran todos los conceptos del bootcamp. Cada ejercicio representa un caso real de la industria.
 
 ---

@@ -14,6 +14,7 @@ Al finalizar esta semana serás capaz de:
 - Usar flag `s` para capturar bloques con saltos de línea
 - Usar flag `u` para soporte Unicode completo
 - Usar flags `y` y `d` para casos especiales
+- Aplicar flags tanto en JavaScript como en Python (`re.IGNORECASE`, `re.MULTILINE`, `re.DOTALL`, etc.)
 
 ## 📚 Contenido
 
@@ -35,7 +36,8 @@ Al finalizar esta semana serás capaz de:
 | Archivo                                                       | Descripción                |
 | ------------------------------------------------------------- | -------------------------- |
 | [proyecto-06-buscador.md](3-proyecto/proyecto-06-buscador.md) | Buscador de texto avanzado |
-| [solucion-proyecto-06.js](3-proyecto/solucion-proyecto-06.js) | Solución del proyecto      |
+| [solucion-proyecto-06.js](3-proyecto/solucion-proyecto-06.js) | Solución del proyecto (JavaScript) |
+| [solucion-proyecto-06.py](3-proyecto/solucion-proyecto-06.py) | Solución del proyecto (Python)     |
 
 ### Recursos y Glosario
 
@@ -70,9 +72,9 @@ Al finalizar esta semana serás capaz de:
 ## ✅ Checklist de Progreso
 
 - [ ] Leer teoría de flags
-- [ ] Completar ejercicios 1-7
+- [ ] Completar ejercicios 1-7 (JavaScript o Python)
 - [ ] Completar desafío log parser
-- [ ] Completar el proyecto buscador
+- [ ] Completar el proyecto buscador (JavaScript o Python)
 - [ ] Revisar el glosario
 
 ## 🔗 Recursos Rápidos

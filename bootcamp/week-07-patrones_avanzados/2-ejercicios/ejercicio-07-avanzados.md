@@ -2,6 +2,10 @@
 
 ## Instrucciones
 
+> **Lenguaje:** Selecciona **JavaScript** o **Python** como flavor según tu lenguaje de programación.
+> - JavaScript: `/patron/` con métodos como `.match()`, `.matchAll()`
+> - Python: `re.compile(r'patron')` con métodos como `.findall()`, `.finditer()`, `.sub()`
+
 - Usa named capture groups cuando sea apropiado
 - Optimiza los patrones para evitar backtracking
 - Todos los ejercicios incluyen casos edge

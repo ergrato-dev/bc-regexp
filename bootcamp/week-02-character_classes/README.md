@@ -13,6 +13,7 @@ Al finalizar esta semana serás capaz de:
 - Aplicar negación con `[^...]`
 - Dominar los shorthand: `\d`, `\w`, `\s` y sus negaciones
 - Usar word boundaries (`\b`) para encontrar palabras completas
+- Aplicar los patrones tanto en JavaScript (con `/regex/`) como en Python (con el módulo `re`)
 
 ## 📚 Contenido
 
@@ -35,7 +36,8 @@ Al finalizar esta semana serás capaz de:
 | Archivo                                                                           | Descripción                    |
 | --------------------------------------------------------------------------------- | ------------------------------ |
 | [proyecto-02-validador-contacto.md](3-proyecto/proyecto-02-validador-contacto.md) | Validador de datos de contacto |
-| [solucion-proyecto-02.js](3-proyecto/solucion-proyecto-02.js)                     | Solución del proyecto          |
+| [solucion-proyecto-02.js](3-proyecto/solucion-proyecto-02.js)                     | Solución del proyecto (JavaScript) |
+| [solucion-proyecto-02.py](3-proyecto/solucion-proyecto-02.py)                     | Solución del proyecto (Python)     |
 
 ### Recursos y Glosario
 
@@ -73,7 +75,7 @@ Al finalizar esta semana serás capaz de:
 - [ ] Leer teoría de shorthand avanzado
 - [ ] Completar ejercicios 1-6
 - [ ] Intentar el desafío extra
-- [ ] Completar el proyecto del validador de contacto
+- [ ] Completar el proyecto del validador de contacto (JavaScript o Python)
 - [ ] Revisar el glosario
 
 ## 🔗 Recursos Rápidos
@@ -81,6 +83,7 @@ Al finalizar esta semana serás capaz de:
 - 🧪 [regex101.com](https://regex101.com) - Tester online
 - 📖 [RegexOne Lesson 3-5](https://regexone.com) - Character classes
 - 📚 [MDN Character Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Character_Classes)
+- 🐍 [Métodos Python (Semana 01)](../week-01-fundamentos_y_metacaracteres/1-teoria/03-metodos-python.md) - Repaso del módulo `re`
 
 ## 💡 Tips de la Semana
 

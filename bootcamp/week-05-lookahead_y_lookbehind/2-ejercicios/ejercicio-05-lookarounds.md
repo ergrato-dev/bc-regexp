@@ -1,5 +1,9 @@
 # Ejercicios - Semana 05: Lookahead y Lookbehind
 
+> **Lenguaje:** Selecciona **JavaScript** o **Python** como flavor según tu lenguaje de programación. Las regex son las mismas; solo cambia la sintaxis del lenguaje.
+> - JavaScript: Usa `/patron/flags` y métodos como `.match()`, `.test()`, `.replace()`
+> - Python: Usa `re.compile(r'patron', flags)` o funciones como `re.findall()`, `re.search()`, `re.sub()`
+
 ## Ejercicio 1: Precios en Diferentes Monedas
 
 **Objetivo:** Extraer solo el número de precios en dólares.

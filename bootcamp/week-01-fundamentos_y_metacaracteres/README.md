@@ -11,7 +11,7 @@ Al finalizar esta semana serás capaz de:
 - Entender qué son las expresiones regulares y para qué sirven
 - Usar literales para buscar texto exacto
 - Dominar los metacaracteres básicos: `.`, `^`, `$`, `\`
-- Aplicar los métodos de JavaScript para trabajar con regex
+- Aplicar los métodos de JavaScript y Python para trabajar con regex
 
 ## 📚 Contenido
 
@@ -20,7 +20,8 @@ Al finalizar esta semana serás capaz de:
 | Archivo                                                         | Tema                                    | Duración |
 | --------------------------------------------------------------- | --------------------------------------- | -------- |
 | [01-introduccion-regexp.md](1-teoria/01-introduccion-regexp.md) | Introducción, literales, metacaracteres | 30 min   |
-| [02-metodos-javascript.md](1-teoria/02-metodos-javascript.md)   | Métodos: test, match, replace, etc.     | 30 min   |
+| [02-metodos-javascript.md](1-teoria/02-metodos-javascript.md) | Métodos JS: test, match, replace, etc.    | 30 min   |
+| [03-metodos-python.md](1-teoria/03-metodos-python.md)         | Métodos Python: re.search, re.sub, etc.    | 30 min   |
 
 ### Ejercicios
 
@@ -34,7 +35,8 @@ Al finalizar esta semana serás capaz de:
 | Archivo                                                         | Descripción                      |
 | --------------------------------------------------------------- | -------------------------------- |
 | [proyecto-01-validador.md](3-proyecto/proyecto-01-validador.md) | Validador de códigos de producto |
-| [solucion-proyecto-01.js](3-proyecto/solucion-proyecto-01.js)   | Solución del proyecto            |
+| [solucion-proyecto-01.js](3-proyecto/solucion-proyecto-01.js) | Solución del proyecto (JavaScript)         |
+| [solucion-proyecto-01.py](3-proyecto/solucion-proyecto-01.py) | Solución del proyecto (Python)             |
 
 ### Recursos y Glosario
 
@@ -67,7 +69,7 @@ Al finalizar esta semana serás capaz de:
 ## ✅ Checklist de Progreso
 
 - [ ] Leer teoría de introducción
-- [ ] Leer teoría de métodos JavaScript
+- [ ] Leer teoría de métodos (elige JavaScript o Python según tu lenguaje)
 - [ ] Completar ejercicios 1-5
 - [ ] Intentar el desafío extra
 - [ ] Completar el proyecto del validador

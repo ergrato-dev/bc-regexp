@@ -1,5 +1,7 @@
 # Proyecto Semana 03: Extractor de Datos de Texto
 
+**Lenguaje:** Elige JavaScript o Python para tu implementación.
+
 ## 🎯 Objetivo
 
 Crear un sistema de extracción de datos que use quantifiers para:
@@ -254,7 +256,8 @@ function generarReporte(datos) {
 ```
 3-proyecto/
 ├── proyecto-03-extractor.md      (este archivo)
-├── extractor.js                   (tu solución)
+├── extractor.js                   (tu solución JavaScript)
+├── extractor.py                   (tu solución Python)
 └── test-extractor.js              (tests)
 ```
 
@@ -279,4 +282,6 @@ Después de completar el proyecto, responde:
 
 ---
 
-**Solución:** Disponible en `solucion-proyecto-03.js`
+**Solución JavaScript:** Disponible en `solucion-proyecto-03.js`
+
+**Solución Python:** Disponible en `solucion-proyecto-03.py`

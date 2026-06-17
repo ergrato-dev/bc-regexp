@@ -13,6 +13,7 @@ Al finalizar esta semana serás capaz de:
 - Usar positive lookbehind `(?<=...)` para verificar lo anterior
 - Usar negative lookbehind `(?<!...)` para excluir por contexto
 - Combinar lookarounds para validaciones complejas
+- Aplicar lookarounds tanto en JavaScript como en Python (`re` module)
 
 ## 📚 Contenido
 
@@ -34,7 +35,8 @@ Al finalizar esta semana serás capaz de:
 | Archivo                                                         | Descripción                       |
 | --------------------------------------------------------------- | --------------------------------- |
 | [proyecto-05-validador.md](3-proyecto/proyecto-05-validador.md) | Validador de formularios avanzado |
-| [solucion-proyecto-05.js](3-proyecto/solucion-proyecto-05.js)   | Solución del proyecto             |
+| [solucion-proyecto-05.js](3-proyecto/solucion-proyecto-05.js)   | Solución del proyecto (JavaScript) |
+| [solucion-proyecto-05.py](3-proyecto/solucion-proyecto-05.py)   | Solución del proyecto (Python)     |
 
 ### Recursos y Glosario
 
@@ -66,9 +68,9 @@ Al finalizar esta semana serás capaz de:
 ## ✅ Checklist de Progreso
 
 - [ ] Leer teoría de lookarounds
-- [ ] Completar ejercicios 1-7
+- [ ] Completar ejercicios 1-7 (JavaScript o Python)
 - [ ] Completar desafío syntax highlighter
-- [ ] Completar el proyecto validador
+- [ ] Completar el proyecto validador (JavaScript o Python)
 - [ ] Revisar el glosario
 
 ## 🔗 Recursos Rápidos

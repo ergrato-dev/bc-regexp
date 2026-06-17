@@ -100,7 +100,7 @@
 
 ### Para esta semana, enfócate en:
 
-1. **regex101.com** - Usa el flavor "JavaScript"
+1. **regex101.com** - Usa el flavor "JavaScript" o "Python" según tu lenguaje o "Python" según tu lenguaje
 2. **RegexOne** - Lecciones 1-4 (Introduction, Literals, Dot, Anchors)
 3. **MDN RegExp** - Sección de metacaracteres básicos
 

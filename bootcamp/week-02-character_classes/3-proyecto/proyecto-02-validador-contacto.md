@@ -1,5 +1,7 @@
 # Proyecto Semana 02: Validador de Datos de Contacto
 
+**Lenguaje:** Elige JavaScript o Python para tu implementación.
+
 ## 🎯 Objetivo
 
 Crear un sistema de validación para datos de contacto usando character classes:
@@ -79,6 +81,38 @@ function validarExtension(ext) {
 }
 
 // ... más funciones
+```
+
+**Python:**
+
+```python
+def validar_codigo_empleado(codigo):
+    """
+    Valida código de empleado
+
+    ¿Por qué? El código identifica únicamente a cada empleado
+    ¿Para qué? Verificar formato antes de buscar en BD
+
+    :param codigo: str
+    :returns: dict
+    """
+    # Tu implementación
+    pass
+
+def validar_extension(ext):
+    """
+    Valida extensión telefónica
+
+    ¿Por qué? Las extensiones tienen longitud fija
+    ¿Para qué? Routing de llamadas interno
+
+    :param ext: str
+    :returns: dict
+    """
+    # Tu implementación
+    pass
+
+# ... más funciones
 ```
 
 ### Paso 3: Validador Integrado
@@ -233,7 +267,8 @@ function encontrarCodigos(texto) {
 ```
 3-proyecto/
 ├── proyecto-02-validador-contacto.md   (este archivo)
-├── validador-contacto.js               (tu solución)
+├── validador-contacto.js               (tu solución JavaScript)
+├── validador-contacto.py               (tu solución Python)
 └── test-validador.js                   (tests opcionales)
 ```
 
@@ -258,4 +293,6 @@ Después de completar el proyecto, responde:
 
 ---
 
-**Solución:** Disponible en `solucion-proyecto-02.js`
+**Solución JavaScript:** Disponible en `solucion-proyecto-02.js`
+
+**Solución Python:** Disponible en `solucion-proyecto-02.py`

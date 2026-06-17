@@ -73,6 +73,57 @@ userAgents.forEach((ua) => {
 });
 ```
 
+**Python:**
+
+```python
+import re
+
+def parse_user_agent(ua):
+    result = {'platform': None, 'platformVersion': None,
+              'browser': None, 'browserVersion': None, 'mobile': False}
+
+    platform_patterns = [
+        (r'Windows NT (?P<version>[\d.]+)', 'Windows'),
+        (r'Mac OS X (?P<version>[\d_]+)', 'Macintosh'),
+        (r'iPhone OS (?P<version>[\d_]+)', 'iPhone'),
+        (r'Android (?P<version>[\d.]+)', 'Android'),
+        (r'Linux', 'Linux'),
+    ]
+    for pat, name in platform_patterns:
+        m = re.search(pat, ua)
+        if m:
+            result['platform'] = name
+            try:
+                result['platformVersion'] = m.group('version').replace('_', '.')
+            except IndexError:
+                pass
+            break
+
+    browser_patterns = [
+        (r'Edg(?:e)?/(?P<version>[\d.]+)', 'Edge'),
+        (r'Chrome/(?P<version>[\d.]+)', 'Chrome'),
+        (r'Firefox/(?P<version>[\d.]+)', 'Firefox'),
+        (r'Version/(?P<version>[\d.]+).*Safari', 'Safari'),
+        (r'Safari/(?P<version>[\d.]+)', 'Safari'),
+    ]
+    for pat, name in browser_patterns:
+        m = re.search(pat, ua)
+        if m:
+            result['browser'] = name
+            result['browserVersion'] = m.group('version')
+            break
+
+    result['mobile'] = bool(re.search(r'Mobile|iPhone|Android.*Mobile', ua, re.IGNORECASE))
+    return result
+
+uas = [
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 Version/17.2 Mobile Safari/604.1',
+]
+for ua in uas:
+    print(parse_user_agent(ua))
+```
+
 ---
 
 ## Ejercicio 2: Validador de Markdown
@@ -165,6 +216,52 @@ This is **bold** and *italic*.
 console.log(parseMarkdown(markdown));
 ````
 
+**Python:**
+
+```python
+import re
+
+markdown_patterns = {
+    'heading': re.compile(r'^(?P<hashes>#{1,6})\s+(?P<content>.+)$', re.MULTILINE),
+    'bold': re.compile(r'\*\*(?P<content>[^*]+)\*\*'),
+    'italic': re.compile(r'(?<!\*)\*(?P<content>[^*]+)\*(?!\*)'),
+    'boldItalic': re.compile(r'\*\*\*(?P<content>[^*]+)\*\*\*'),
+    'strikethrough': re.compile(r'~~(?P<content>[^~]+)~~'),
+    'inlineCode': re.compile(r'`(?P<content>[^`]+)`'),
+    'link': re.compile(r'\[(?P<text>[^\]]+)\]\((?P<url>[^)]+)\)'),
+    'image': re.compile(r'!\[(?P<alt>[^\]]*)\]\((?P<url>[^)]+)\)'),
+    'listItem': re.compile(r'^(?P<indent>\s*)(?P<marker>[-*]|\d+\.)\s+(?P<content>.+)$', re.MULTILINE),
+    'blockquote': re.compile(r'^>\s*(?P<content>.+)$', re.MULTILINE),
+    'codeBlock': re.compile(r'```(?P<lang>\w*)?\n(?P<code>[\s\S]*?)```'),
+}
+
+def parse_markdown(text):
+    elements = []
+    for match in markdown_patterns['heading'].finditer(text):
+        elements.append({'type': 'heading', 'level': len(match.group('hashes')),
+                         'content': match.group('content'), 'index': match.start()})
+    for match in markdown_patterns['bold'].finditer(text):
+        elements.append({'type': 'bold', 'content': match.group('content'), 'index': match.start()})
+    for match in markdown_patterns['link'].finditer(text):
+        elements.append({'type': 'link', 'text': match.group('text'),
+                         'url': match.group('url'), 'index': match.start()})
+    for match in markdown_patterns['image'].finditer(text):
+        elements.append({'type': 'image', 'alt': match.group('alt'),
+                         'url': match.group('url'), 'index': match.start()})
+    for match in markdown_patterns['codeBlock'].finditer(text):
+        elements.append({'type': 'codeBlock', 'language': match.group('lang') or None,
+                         'code': match.group('code'), 'index': match.start()})
+    elements.sort(key=lambda x: x['index'])
+    return elements
+
+markdown = """# Title
+This is **bold** and *italic*.
+[Link](https://example.com)
+![Image](image.png)
+"""
+print(parse_markdown(markdown))
+```
+
 ---
 
 ## Ejercicio 3: Analizador de SQL
@@ -229,6 +326,52 @@ const queries = [
 ];
 
 queries.forEach((q) => console.log(parseSQL(q)));
+```
+
+**Python:**
+
+```python
+import re
+
+sql_patterns = {
+    'select': re.compile(
+        r'^SELECT\s+(?P<columns>.+?)\s+FROM\s+(?P<table>\w+)'
+        r'(?:\s+WHERE\s+(?P<where>.+?))?'
+        r'(?:\s+ORDER\s+BY\s+(?P<orderBy>.+?))?'
+        r'(?:\s+LIMIT\s+(?P<limit>\d+))?$', re.IGNORECASE),
+    'insert': re.compile(
+        r'^INSERT\s+INTO\s+(?P<table>\w+)\s*\((?P<columns>[^)]+)\)'
+        r'\s*VALUES\s*\((?P<values>.+)\)$', re.IGNORECASE),
+    'update': re.compile(
+        r'^UPDATE\s+(?P<table>\w+)\s+SET\s+(?P<sets>.+?)'
+        r'(?:\s+WHERE\s+(?P<where>.+))?$', re.IGNORECASE),
+    'delete': re.compile(
+        r'^DELETE\s+FROM\s+(?P<table>\w+)'
+        r'(?:\s+WHERE\s+(?P<where>.+))?$', re.IGNORECASE),
+}
+
+def parse_sql(query):
+    query = query.strip()
+    sql_type = query.split()[0].upper()
+    pattern = sql_patterns.get(sql_type.lower())
+    if not pattern:
+        return {'error': 'Unsupported query type', 'type': sql_type}
+    m = pattern.search(query)
+    if not m:
+        return {'error': 'Invalid query syntax', 'type': sql_type}
+    result = {'type': sql_type, **m.groupdict()}
+    if sql_type == 'SELECT' and result.get('columns'):
+        result['columns'] = ['*'] if result['columns'] == '*' else [c.strip() for c in result['columns'].split(',')]
+    return result
+
+queries = [
+    'SELECT id, name, email FROM users WHERE active = 1',
+    "INSERT INTO logs (timestamp, message) VALUES ('2024-03-15', 'Test')",
+    "UPDATE users SET status = 'active' WHERE id = 42",
+    'DELETE FROM sessions WHERE expires < NOW()',
+]
+for q in queries:
+    print(parse_sql(q))
 ```
 
 ---
@@ -304,6 +447,47 @@ DEBUG=false
 `;
 
 console.log(parseConfig(configText));
+```
+
+**Python:**
+
+```python
+import re
+
+def parse_config(text):
+    config = {'_default': {}}
+    current_section = '_default'
+    patterns = {
+        'comment': re.compile(r'^\s*[#;]'),
+        'section': re.compile(r'^\s*\[(?P<name>\w+)\]\s*$'),
+        'keyValue': re.compile(r'^\s*(?P<key>[\w.]+)\s*=\s*(?P<value>.+?)\s*$'),
+    }
+    for line in text.split('\n'):
+        if not line.strip() or patterns['comment'].search(line):
+            continue
+        sm = patterns['section'].search(line)
+        if sm:
+            current_section = sm.group('name')
+            config.setdefault(current_section, {})
+            continue
+        km = patterns['keyValue'].search(line)
+        if km:
+            key, value = km.group('key'), km.group('value')
+            if re.match(r'^["\'].*["\']$', value):
+                value = value[1:-1]
+            elif value == 'true':
+                value = True
+            elif value == 'false':
+                value = False
+            elif re.match(r'^\d+$', value):
+                value = int(value)
+            elif re.match(r'^\d+\.\d+$', value):
+                value = float(value)
+            config[current_section][key] = value
+    return config
+
+config_text = """\n# Database settings\nDB_HOST=localhost\nDB_PORT=5432\nDEBUG=true\n\n[production]\nDB_HOST=prod-db.example.com\nDEBUG=false\n"""
+print(parse_config(config_text))
 ```
 
 ---
@@ -384,6 +568,36 @@ const code = `
 console.log(extractMetadata(code));
 ```
 
+**Python:**
+
+```python
+import re
+
+metadata_patterns = {
+    'fileBlock': re.compile(r'/\*\*[\s\S]*?@file\s+(?P<description>.+?)[\s\S]*?\*/'),
+    'author': re.compile(r'@author\s+(?P<name>[^<\n]+)(?:<(?P<email>[^>]+)>)?'),
+    'version': re.compile(r'@version\s+(?P<version>[\d.]+)'),
+    'todo': re.compile(r'//\s*(?P<type>TODO|FIXME|NOTE|HACK|XXX):?\s*(?P<message>.+)', re.IGNORECASE),
+}
+
+def extract_metadata(code):
+    metadata = {'file': None, 'authors': [], 'version': None, 'todos': []}
+    fm = metadata_patterns['fileBlock'].search(code)
+    if fm:
+        metadata['file'] = fm.group('description')
+        vm = metadata_patterns['version'].search(fm.group(0))
+        if vm:
+            metadata['version'] = vm.group('version')
+    for m in metadata_patterns['author'].finditer(code):
+        metadata['authors'].append({'name': m.group('name').strip(), 'email': m.group('email')})
+    for m in metadata_patterns['todo'].finditer(code):
+        metadata['todos'].append({'type': m.group('type').upper(), 'message': m.group('message')})
+    return metadata
+
+code = """\n/**\n * @file User Authentication\n * @author John Doe <john@example.com>\n * @version 2.0.0\n */\n\n// TODO: Implement password reset\n// FIXME: Handle expired tokens\n"""
+print(extract_metadata(code))
+```
+
 ---
 
 ## Ejercicio 6: Parser de Commits de Git
@@ -461,6 +675,55 @@ const commits = [
 commits.forEach((c) => console.log(parseCommit(c)));
 ```
 
+**Python:**
+
+```python
+import re
+
+commit_pattern = re.compile(
+    r'^(?P<type>feat|fix|docs|style|refactor|test|chore|perf|ci|build|revert)'
+    r'(?:\((?P<scope>[^)]+)\))?(?P<breaking>!)?: (?P<description>.+)$'
+)
+footer_breaking = re.compile(r'^BREAKING CHANGE:\s*(?P<message>.+)$', re.MULTILINE)
+footer_closes = re.compile(r'(?:Closes?|Fixes?|Resolves?)\s+#(?P<issue>\d+)', re.IGNORECASE)
+
+def parse_commit(message):
+    lines = message.strip().split('\n')
+    hm = commit_pattern.search(lines[0])
+    if not hm:
+        return {'error': 'Invalid commit format', 'raw': message}
+    result = {
+        'type': hm.group('type'),
+        'scope': hm.group('scope'),
+        'breaking': hm.group('breaking') == '!',
+        'description': hm.group('description'),
+        'body': None,
+        'issues': [],
+    }
+    if len(lines) > 1:
+        body_lines = []
+        for line in lines[1:]:
+            bm = footer_breaking.search(line)
+            if bm:
+                result['breaking'] = True
+                result['breakingMessage'] = bm.group('message')
+                continue
+            for cm in footer_closes.finditer(line):
+                result['issues'].append(int(cm.group('issue')))
+            if line.strip() and not footer_closes.search(line):
+                body_lines.append(line)
+        if body_lines:
+            result['body'] = '\n'.join(body_lines).strip()
+    return result
+
+commits = [
+    'feat(auth): add login with Google OAuth',
+    'fix!: remove deprecated API\n\nBREAKING CHANGE: The old API is gone\n\nCloses #123',
+]
+for c in commits:
+    print(parse_commit(c))
+```
+
 ---
 
 ## Ejercicio 7: Validador de Semver
@@ -510,4 +773,51 @@ function compareSemver(a, b) {
 console.log(parseSemver('1.2.3-alpha.1+build.123'));
 console.log(compareSemver('1.0.0', '2.0.0')); // -1
 console.log(compareSemver('1.0.0', '1.0.0-alpha')); // 1
+```
+
+**Python:**
+
+```python
+import re
+
+semver_pattern = re.compile(
+    r'^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)'
+    r'(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)'
+    r'(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?'
+    r'(?:\+(?P<build>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$'
+)
+
+def parse_semver(version):
+    m = semver_pattern.search(version)
+    if not m:
+        return None
+    return {
+        'major': int(m.group('major')),
+        'minor': int(m.group('minor')),
+        'patch': int(m.group('patch')),
+        'prerelease': m.group('prerelease'),
+        'build': m.group('build'),
+        'isPrerelease': bool(m.group('prerelease')),
+    }
+
+def compare_semver(a, b):
+    va = parse_semver(a)
+    vb = parse_semver(b)
+    if not va or not vb:
+        return None  # NaN equivalent
+    if va['major'] != vb['major']:
+        return va['major'] - vb['major']
+    if va['minor'] != vb['minor']:
+        return va['minor'] - vb['minor']
+    if va['patch'] != vb['patch']:
+        return va['patch'] - vb['patch']
+    if va['prerelease'] and not vb['prerelease']:
+        return -1
+    if not va['prerelease'] and vb['prerelease']:
+        return 1
+    return 0
+
+print(parse_semver('1.2.3-alpha.1+build.123'))
+print(compare_semver('1.0.0', '2.0.0'))  # -1
+print(compare_semver('1.0.0', '1.0.0-alpha'))  # 1
 ```

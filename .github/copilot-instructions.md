@@ -2,7 +2,7 @@
 
 ## Descripción del Proyecto
 
-Este es un **bootcamp de Expresiones Regulares (RegExp)** de zero to hero, diseñado para 8 semanas con dedicación de 4 horas semanales.
+Este es un **bootcamp de Expresiones Regulares (RegExp)** de zero to hero, diseñado para 8 semanas con dedicación de 4 horas semanales. Soporta implementaciones en **JavaScript** y **Python**.
 
 ## Estructura del Proyecto
 
@@ -32,6 +32,8 @@ bc-regexp/
 - Títulos en formato: `# Semana XX: Título del Tema`
 - Incluir ejemplos de código con syntax highlighting
 - Usar bloques de código con lenguaje especificado: ` ```regex `, ` ```javascript `, ` ```python `
+- Para ejercicios y soluciones, incluir código en **ambos lenguajes** (JavaScript y Python)
+- Cada bloque de código debe incluir explicación de "¿Por qué? / ¿Para qué?"
 
 ### Ejemplos de RegExp
 
@@ -40,6 +42,7 @@ bc-regexp/
   - Texto de prueba
   - Resultado esperado
   - Explicación paso a paso
+- Incluir ejemplos de código en JavaScript y Python cuando aplique
 
 ```markdown
 **Patrón:** `/\d{3}-\d{4}/`
@@ -137,6 +140,19 @@ bc-regexp/
 
 1. **¿Por qué?** - La razón o problema que resuelve
 2. **¿Para qué?** - El propósito o resultado esperado
+
+### Mapeo Rápido JavaScript ↔ Python
+
+| JavaScript | Python |
+|------------|--------|
+| `pattern.test(str)` | `bool(re.search(pattern, str))` |
+| `str.match(/p/g)` | `re.findall(pattern, str)` |
+| `str.matchAll(/p/g)` | `re.finditer(pattern, str)` |
+| `str.replace(/p/, r)` | `re.sub(pattern, r, str, count=1)` |
+| `str.replace(/p/g, r)` | `re.sub(pattern, r, str)` |
+| `str.split(/p/)` | `re.split(pattern, str)` |
+| `new RegExp(p, f)` | `re.compile(pattern, flags)` |
+| `(?<name>...)` | `(?P<name>...)` (named groups) |
 
 ### Formato de Explicación
 

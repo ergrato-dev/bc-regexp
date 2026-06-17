@@ -35,6 +35,29 @@ console.log(`Total: $${total.toFixed(2)}`);
 // Total: $274.98
 ```
 
+**Python:**
+
+```python
+import re
+
+precio_pattern = re.compile(r'(?<=\$)\d+\.\d{2}')
+
+texto = """Producto A: $99.99
+Producto B: €85.00
+Producto C: $149.99
+Producto D: £120.00
+Producto E: $25.50"""
+
+print(precio_pattern.findall(texto))
+# ['99.99', '149.99', '25.50']
+
+# Convertir a números y sumar
+precios = [float(p) for p in precio_pattern.findall(texto)]
+total = sum(precios)
+print(f'Total: ${total:.2f}')
+# Total: $274.98
+```
+
 ---
 
 ## Ejercicio 2: Palabras Sin Prefijo "un"
@@ -68,6 +91,29 @@ console.log(palabras);
 const excluidas = texto.match(/\bun\w+\b/gi);
 console.log('Excluidas:', excluidas);
 // ['undone', 'unhappy', 'unopened']
+```
+
+**Python:**
+
+```python
+import re
+
+pattern = re.compile(r'\b(?!un)\w+\b', re.IGNORECASE)
+
+texto = """The task was undone but the work was complete.
+He was unhappy but she was happy.
+The box was unopened while another was opened."""
+
+palabras = pattern.findall(texto)
+print(palabras)
+# ['The', 'task', 'was', 'but', 'the', 'work', 'was', 'complete',
+#  'He', 'was', 'but', 'she', 'was', 'happy',
+#  'The', 'box', 'was', 'while', 'another', 'was', 'opened']
+
+# Verificar que las palabras "un..." fueron excluidas
+excluidas = re.findall(r'\bun\w+\b', texto, re.IGNORECASE)
+print('Excluidas:', excluidas)
+# ['undone', 'unhappy', 'unopened']
 ```
 
 ---
@@ -109,6 +155,33 @@ for (const match of texto.matchAll(conUnidades)) {
 // Valor: 75, Unidad: kg
 // Valor: 180, Unidad: cm
 // Valor: 500, Unidad: m
+```
+
+**Python:**
+
+```python
+import re
+
+pattern = re.compile(r'\d+(?=(?:km|kg|cm|m)\b)')
+
+texto = """Velocidad: 120km/h
+Peso: 75kg
+Altura: 180cm
+Temperatura: 25
+Distancia: 500m
+Precio: 99"""
+
+print(pattern.findall(texto))
+# ['120', '75', '180', '500']
+
+# Para obtener también las unidades (separadas)
+con_unidades = re.compile(r'(\d+)(km|kg|cm|m)\b')
+for match in con_unidades.finditer(texto):
+    print(f'Valor: {match.group(1)}, Unidad: {match.group(2)}')
+# Valor: 120, Unidad: km
+# Valor: 75, Unidad: kg
+# Valor: 180, Unidad: cm
+# Valor: 500, Unidad: m
 ```
 
 ---
@@ -154,6 +227,34 @@ console.log(esEmailCorporativo('test@gmail.com')); // false
 console.log(esEmailCorporativo('test@empresa.com')); // true
 ```
 
+**Python:**
+
+```python
+import re
+
+pattern = re.compile(
+    r'[\w.-]+@(?!(?:gmail|hotmail|yahoo|outlook)\.com\b)[\w.-]+\.\w{2,}',
+    re.IGNORECASE
+)
+
+texto = """empleado@empresa.com
+personal@gmail.com
+trabajo@corporacion.es
+amigo@hotmail.com
+jefe@compania.net
+contacto@yahoo.com"""
+
+print(pattern.findall(texto))
+# ['empleado@empresa.com', 'trabajo@corporacion.es', 'jefe@compania.net']
+
+# Función de validación
+def es_email_corporativo(email):
+    return bool(pattern.search(email))
+
+print(es_email_corporativo('test@gmail.com'))  # False
+print(es_email_corporativo('test@empresa.com'))  # True
+```
+
 ---
 
 ## Ejercicio 5: Extraer Valores de Atributos HTML
@@ -191,6 +292,35 @@ function extraerAtributo(html, atributo) {
 
 console.log(extraerAtributo(html, 'href'));
 // ['/link']
+```
+
+**Python:**
+
+```python
+import re
+
+id_pattern = re.compile(r'(?<=id=["\'])[^"\']+(?=["\'])')
+class_pattern = re.compile(r'(?<=class=["\'])[^"\']+(?=["\'])')
+
+html = """<div id="main" class="container">
+  <span id="title" class="header-text">
+  <a href="/link" class="nav-link">
+  <button id="submit" type="submit">
+</div>"""
+
+ids = id_pattern.findall(html)
+classes = class_pattern.findall(html)
+
+print('IDs:', ids)      # ['main', 'title', 'submit']
+print('Classes:', classes)  # ['container', 'header-text', 'nav-link']
+
+# Función genérica
+def extraer_atributo(html, atributo):
+    pattern = re.compile(rf'(?<={atributo}=["\'])[^"\']+(?=["\'])')
+    return pattern.findall(html) or []
+
+print(extraer_atributo(html, 'href'))
+# ['/link']
 ```
 
 ---
@@ -250,6 +380,46 @@ console.log(validarFuerte('Abc123!@'));
 // { valido: true, requisitos: { longitud: true, ... } }
 ```
 
+**Python:**
+
+```python
+import re
+
+password_pattern = re.compile(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$')
+
+def validar(password):
+    return bool(password_pattern.search(password))
+
+# Tests
+print(validar('Abc12345'))   # True
+print(validar('abcdefgh'))   # False (sin mayúscula)
+print(validar('ABC12345'))   # False (sin minúscula)
+print(validar('Abcdefgh'))   # False (sin dígito)
+print(validar('Abc123'))     # False (menos de 8)
+print(validar('Abc123!@#'))  # True
+print(validar('abc123!@'))   # False (sin mayúscula)
+
+# Con requisitos adicionales
+strong_pattern = re.compile(
+    r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])(?!.*\s).{8,20}$'
+)
+
+def validar_fuerte(password):
+    return {
+        'valido': bool(strong_pattern.search(password)),
+        'requisitos': {
+            'longitud': 8 <= len(password) <= 20,
+            'mayuscula': bool(re.search(r'[A-Z]', password)),
+            'minuscula': bool(re.search(r'[a-z]', password)),
+            'digito': bool(re.search(r'\d', password)),
+            'especial': bool(re.search(r'[!@#$%^&*]', password)),
+            'sin_espacios': not bool(re.search(r'\s', password)),
+        }
+    }
+
+print(validar_fuerte('Abc123!@'))
+```
+
 ---
 
 ## Ejercicio 7: Formatear Números con Separadores
@@ -286,6 +456,29 @@ function formatearDecimal(num) {
 }
 
 console.log(formatearDecimal(1234567.89)); // "1,234,567.89"
+```
+
+**Python:**
+
+```python
+import re
+
+def formatear(num):
+    return re.sub(r'\B(?=(\d{3})+(?!\d))', ',', str(num))
+
+print(formatear(1234))          # "1,234"
+print(formatear(1234567))       # "1,234,567"
+print(formatear(1000000))       # "1,000,000"
+print(formatear(123))           # "123"
+print(formatear(12345678901))   # "12,345,678,901"
+
+# Versión para decimales
+def formatear_decimal(num):
+    entero, *resto = str(num).split('.')
+    entero_formateado = formatear(entero)
+    return f"{entero_formateado}.{resto[0]}" if resto else entero_formateado
+
+print(formatear_decimal(1234567.89))  # "1,234,567.89"
 ```
 
 ---
@@ -373,6 +566,74 @@ function resaltarHTML(code) {
 }
 
 console.log(resaltarHTML(codigo));
+```
+
+**Python:**
+
+```python
+import re
+
+codigo = """const greeting = "Hello World";
+let count = 42;
+function sayHello() {
+  return greeting;
+}
+// This is a comment
+const result = sayHello();"""
+
+def analizar_codigo(code):
+    # Primero extraer comentarios y strings (para excluirlos después)
+    comentarios = re.findall(r'//.*$', code, re.MULTILINE) or []
+    strings = re.findall(r'["\'][^"\']*["\']', code) or []
+
+    # Crear versión sin comentarios ni strings para buscar keywords
+    codigo_limpio = re.sub(r'//.*$', '___COMMENT___', code, flags=re.MULTILINE)
+    codigo_limpio = re.sub(r'["\'][^"\']*["\']', '___STRING___', codigo_limpio)
+
+    # Keywords (solo como palabras completas)
+    keywords = re.findall(
+        r'\b(?:const|let|var|function|return|if|else|for|while)\b',
+        codigo_limpio
+    ) or []
+
+    # Números (no dentro de strings)
+    numeros = re.findall(r'\b\d+\b', codigo_limpio) or []
+
+    return {
+        'keywords': keywords,
+        'strings': strings,
+        'numbers': numeros,
+        'comments': comentarios,
+    }
+
+print(analizar_codigo(codigo))
+# {
+#   'keywords': ['const', 'let', 'function', 'return', 'const'],
+#   'strings': ['"Hello World"'],
+#   'numbers': ['42'],
+#   'comments': ['// This is a comment']
+# }
+
+# Versión avanzada: resalta en HTML
+def resaltar_html(code):
+    import re
+    resultado = code
+    # Escapar HTML
+    resultado = resultado.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+    # Comentarios primero
+    resultado = re.sub(r'//.*$', r'<span class="comment">\g<0></span>', resultado, flags=re.MULTILINE)
+    # Strings
+    resultado = re.sub(r'["\'][^"\']*["\']', r'<span class="string">\g<0></span>', resultado)
+    # Keywords
+    resultado = re.sub(
+        r'\b(const|let|var|function|return|if|else|for|while)\b',
+        r'<span class="keyword">\1</span>', resultado
+    )
+    # Números
+    resultado = re.sub(r'\b(\d+)\b', r'<span class="number">\1</span>', resultado)
+    return resultado
+
+print(resaltar_html(codigo))
 ```
 
 ---

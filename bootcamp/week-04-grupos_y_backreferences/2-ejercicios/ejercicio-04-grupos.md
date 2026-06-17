@@ -329,6 +329,7 @@ ftp://files.servidor.net/descargas/archivo.zip
 
 ## Recursos
 
+- Selecciona 'JavaScript' o 'Python' como flavor en regex101 según tu lenguaje
 - [MDN: Groups and Backreferences](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Backreferences)
 - [regex101.com](https://regex101.com) - Visualiza grupos
 

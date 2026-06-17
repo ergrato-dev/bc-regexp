@@ -1,5 +1,9 @@
 # Proyecto Final: RegEx Toolkit
 
+> **Lenguaje:** Elige **JavaScript** o **Python** para tu implementación. Ambas soluciones de referencia están disponibles.
+> - **JavaScript:** `/patron/flags` nativos del lenguaje
+> - **Python:** `re.compile(r'patron', flags)` del módulo `re` (y `regex` para Unicode avanzado)
+
 ## 🎯 Objetivo
 
 Crear una **librería completa de expresiones regulares** con patrones reutilizables, validadores, extractores y transformadores.
@@ -10,6 +14,7 @@ Este proyecto final integra todo lo aprendido en el bootcamp. Crearás un toolki
 
 ## 🛠️ Estructura del Proyecto
 
+**JavaScript:**
 ```
 regex-toolkit/
 ├── src/
@@ -46,6 +51,50 @@ regex-toolkit/
 │
 ├── tests/
 │   └── *.test.js
+│
+├── docs/
+│   └── api.md
+│
+└── README.md
+```
+
+**Python:**
+```
+regex_toolkit/
+├── src/
+│   ├── validators/
+│   │   ├── email.py
+│   │   ├── url.py
+│   │   ├── phone.py
+│   │   ├── password.py
+│   │   ├── credit_card.py
+│   │   └── __init__.py
+│   │
+│   ├── extractors/
+│   │   ├── emails.py
+│   │   ├── urls.py
+│   │   ├── hashtags.py
+│   │   ├── mentions.py
+│   │   ├── dates.py
+│   │   └── __init__.py
+│   │
+│   ├── parsers/
+│   │   ├── user_agent.py
+│   │   ├── log.py
+│   │   ├── csv_parser.py
+│   │   ├── markdown.py
+│   │   └── __init__.py
+│   │
+│   ├── transformers/
+│   │   ├── case.py
+│   │   ├── sanitize.py
+│   │   ├── format.py
+│   │   └── __init__.py
+│   │
+│   └── __init__.py
+│
+├── tests/
+│   └── test_*.py
 │
 ├── docs/
 │   └── api.md
@@ -146,6 +195,7 @@ export const transformers = {
 
 ## 💡 Ejemplo de Implementación
 
+**JavaScript:**
 ```javascript
 // validators/email.js
 
@@ -186,6 +236,48 @@ export function validateEmail(email, options = {}) {
 console.assert(validateEmail('user@example.com') === true);
 console.assert(validateEmail('user+tag@example.com') === true);
 console.assert(validateEmail('invalid') === false);
+```
+
+**Python:**
+```python
+# validators/email.py
+import re
+
+def validate_email(email, options=None):
+    """Validar formato de email.
+
+    ¿Por qué? Email tiene formato RFC 5322
+    ¿Para qué? Validación de formularios
+
+    Args:
+        email: String del email a validar.
+        options: Dict con opciones de validación.
+    Returns:
+        bool
+    """
+    opts = options or {}
+    allow_subaddress = opts.get('allowSubaddress', True)
+    allow_ip = opts.get('allowIp', False)
+    max_length = opts.get('maxLength', 254)
+
+    if not email or len(email) > max_length:
+        return False
+
+    pattern = re.compile(
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@"
+        r'[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?'
+        r'(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'
+    )
+
+    if not allow_subaddress and '+' in email:
+        return False
+
+    return bool(pattern.search(email))
+
+# Tests
+assert validate_email('user@example.com') is True
+assert validate_email('user+tag@example.com') is True
+assert validate_email('invalid') is False
 ```
 
 ## 🚀 Extensiones Opcionales
@@ -257,4 +349,5 @@ Cada función debe incluir:
 
 ---
 
-**Solución de referencia:** [solucion-proyecto-final.js](solucion-proyecto-final.js)
+**Solución de referencia JavaScript:** [solucion-proyecto-final.js](solucion-proyecto-final.js)
+**Solución de referencia Python:** [solucion-proyecto-final.py](solucion-proyecto-final.py)
