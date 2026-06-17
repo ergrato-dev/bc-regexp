@@ -1,0 +1,14 @@
+services:
+  js:
+    build: .
+    working_dir: /bootcamp
+    volumes:
+      - .:/bootcamp
+    entrypoint: ["node"]
+
+  python:
+    build: .
+    working_dir: /bootcamp
+    volumes:
+      - .:/bootcamp
+    entrypoint: ["python3"]

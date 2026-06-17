@@ -1,0 +1,10 @@
+.git/
+.github/
+.vscode/
+.gitignore
+.dockerignore
+*.md
+node_modules/
+__pycache__/
+venv/
+.env*

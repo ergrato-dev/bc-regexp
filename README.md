@@ -27,9 +27,12 @@ Domina las **expresiones regulares (RegExp)** desde los fundamentos hasta técni
 
 ```
 bc-regexp/
-├── 📂 assets/             # Recursos globales (imágenes, SVGs)
-├── 📂 _docs/              # Documentación general
-├── 📂 _scripts/           # Scripts de utilidad
+├── Dockerfile                # Node.js + Python en contenedor
+├── docker-compose.yml        # Servicios: js, python
+├── 📂 assets/                # Recursos globales (imágenes, SVGs)
+├── 📂 scripts/               # Scripts wrapper para ejecutar soluciones
+├── 📂 _docs/                 # Documentación general
+├── 📂 _scripts/              # Scripts de utilidad
 └── 📂 bootcamp/
     └── 📂 week-XX-tema_principal/
         ├── 📂 0-assets/       # Recursos de la semana
@@ -60,6 +63,42 @@ Elige el lenguaje con el que te sientas más cómodo:
 La sintaxis de las expresiones regulares es la misma en ambos lenguajes. Solo cambian los métodos usados para aplicarlas.
 
 ## 🚀 Cómo Empezar
+
+### Opción A: Con Docker (recomendado)
+
+Sin instalar Node.js ni Python. Solo necesitas Docker.
+
+1. **Clona el repositorio**
+
+   ```bash
+   git clone https://github.com/tu-usuario/bc-regexp.git
+   cd bc-regexp
+   ```
+
+2. **Construye la imagen**
+
+   ```bash
+   docker compose build
+   ```
+
+3. **Ejecuta las soluciones**
+
+   ```bash
+   # JavaScript
+   docker compose run --rm js bootcamp/week-01-fundamentos_y_metacaracteres/3-proyecto/solucion-proyecto-01.js
+
+   # Python
+   docker compose run --rm python bootcamp/week-01-fundamentos_y_metacaracteres/3-proyecto/solucion-proyecto-01.py
+   ```
+
+   O usa los scripts wrapper:
+
+   ```bash
+   ./scripts/ejecutar-js.sh bootcamp/week-01.../solucion-proyecto-01.js
+   ./scripts/ejecutar-py.sh bootcamp/week-01.../solucion-proyecto-01.py
+   ```
+
+### Opción B: Instalación local
 
 1. **Clona el repositorio**
 
@@ -93,7 +132,7 @@ La sintaxis de las expresiones regulares es la misma en ambos lenguajes. Solo ca
 
 - Conocimientos básicos de programación (JavaScript o Python)
 - Editor de código (VS Code recomendado)
-- Node.js o Python instalado
+- [Docker](https://docs.docker.com/get-docker/) (recomendado) o Node.js / Python instalado localmente
 - Ganas de aprender 💪
 
 ## 📝 Licencia
